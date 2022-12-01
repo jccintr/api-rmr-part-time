@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ServicoController;
 use App\http\Controllers\ContratadoController;
+use App\Http\Controllers\loginController;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,7 +28,9 @@ Route::post('/servicos', [ServicoController::class, 'add']);
 Route::get('/servico/{id}', [ServicoController::class, 'getById']);
 // Contratado Controller ====================================================
 Route::get('/contratados', [ContratadoController::class, 'list']);
-Route::post('/conrtatados', [ContratadoController::class, 'add']);
+Route::post('/contratados', [ContratadoController::class, 'add']);
 Route::get('/contratado/{id}', [ContratadoController::class, 'getById']);
-
+// login controller =========================================================
+Route::post('/signin',[loginController::class,'signin']);
+Route::post('/signup',[loginController::class,'signup']);
 
