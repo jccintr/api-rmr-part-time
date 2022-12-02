@@ -24,7 +24,7 @@ public function add(Request $request)
   $horario = $request->horario;
   $periodo_minimo = $request->periodo_minimo;
   $imagem = $request->file('imagem');
-  
+
 
 
   if($imagem && $nome && $descricao) {
@@ -51,14 +51,14 @@ public function add(Request $request)
 // Lista todos Servicos GET
 //===========================================================
     public function list(){
-    
-        $servicos = Servico::all();
+
+        $servicos = Servico::orderBy('nome')->get();
       if ($servicos) {
         return response()->json($servicos,200);
       } else {
         return response()->json(['erro'=>'Serviços não encontradas'],404);
       }
-    
+
         }
 
 

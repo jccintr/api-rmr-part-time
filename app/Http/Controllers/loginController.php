@@ -47,6 +47,7 @@ class loginController extends Controller
         $password = $request->password;
         $telefone = $request->telefone;
         $role = $request->role;
+        
        
         if($name && $email && $password && $telefone) {
             $user = User::select()->where('email', $email)->first();

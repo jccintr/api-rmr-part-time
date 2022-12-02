@@ -3,8 +3,10 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ServicoController;
+
 use App\http\Controllers\ContratadoController;
 use App\Http\Controllers\loginController;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,10 +29,12 @@ Route::get('/servicos', [ServicoController::class, 'list']);
 Route::post('/servicos', [ServicoController::class, 'add']);
 Route::get('/servico/{id}', [ServicoController::class, 'getById']);
 // Contratado Controller ====================================================
-Route::get('/contratados', [ContratadoController::class, 'list']);
-Route::post('/contratados', [ContratadoController::class, 'add']);
-Route::get('/contratado/{id}', [ContratadoController::class, 'getById']);
+//Route::get('/contratados', [ContratadoController::class, 'list']);
+Route::post('/contratados', 'App\Http\Controllers\ContratadoController@add');
+Route::get('/contratados/{idServico}', 'App\Http\Controllers\ContratadoController@getContratadosByService');
 // login controller =========================================================
 Route::post('/signin',[loginController::class,'signin']);
 Route::post('/signup',[loginController::class,'signup']);
-
+// User controller =========================================================
+Route::post('/avatar',[UserController::class,'updateAvatar']);
+Route::get('/user/{token}',[UserController::class,'getUser']);
