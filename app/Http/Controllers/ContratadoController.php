@@ -8,11 +8,11 @@ use Illuminate\Http\Request;
 
 class ContratadoController extends Controller
 {
-  //================================================================
+//================================================================
 // Adiciona um Contratado POST
 //================================================================
 
-public function add(Request $request)
+public function subscribe(Request $request)
 {
   $array = ['erro'=>''];
 
@@ -39,6 +39,9 @@ public function add(Request $request)
   }
 }
 
+//================================================================
+// Recupera os profissionais inscritos em um Servico POST
+//================================================================
 
 public function getContratadosByService($idServico){
 
@@ -50,7 +53,7 @@ foreach ($contratados as $contratado){
 
 }
 
- 
+
  if ($contratados) {
     return response()->json($contratados,200);
   } else {
@@ -59,5 +62,41 @@ foreach ($contratados as $contratado){
 
 }
 
+//================================================================
+// Desativa um contratado POST
+//================================================================
+public function deative(Request $request){
+
+  $contratado_id = $request->contratado_id;
+
+
+
+  $contratado = Contratado::find($contratado_id);
+  $contratado->ativo = false;
+  $contratado->save();
+  if ($contratado) {
+     return response()->json($contratado,200);
+   } else {
+     return response()->json(['erro'=>'Contratado não encontrado'],404);
+   }
+}
+
+//================================================================
+// Ativa um contratado POST
+//================================================================
+public function ative(Request $request){
+
+  $servico_id = $request->servico_id;
+  $user_id = $request->user_id;
+
+  $contratado = Contratado::where('servico_id',$servico_id)->where('user_id',$user_id)->first();
+  $contratado->ativo = true;
+  $contratado->save();
+  if ($contratado) {
+     return response()->json($contratado,200);
+   } else {
+     return response()->json(['erro'=>'Contratado não encontrado'],404);
+   }
+}
 
 }

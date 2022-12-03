@@ -30,7 +30,9 @@ Route::post('/servicos', [ServicoController::class, 'add']);
 Route::get('/servico/{id}', [ServicoController::class, 'getById']);
 // Contratado Controller ====================================================
 //Route::get('/contratados', [ContratadoController::class, 'list']);
-Route::post('/contratados', 'App\Http\Controllers\ContratadoController@add');
+Route::post('/contratados', 'App\Http\Controllers\ContratadoController@subscribe');  // adiciona um contratado
+Route::post('/contratados/deative', 'App\Http\Controllers\ContratadoController@deative');
+Route::post('/contratados/active', 'App\Http\Controllers\ContratadoController@active');
 Route::get('/contratados/{idServico}', 'App\Http\Controllers\ContratadoController@getContratadosByService');
 // login controller =========================================================
 Route::post('/signin',[loginController::class,'signin']);

@@ -25,8 +25,6 @@ public function add(Request $request)
   $periodo_minimo = $request->periodo_minimo;
   $imagem = $request->file('imagem');
 
-
-
   if($imagem && $nome && $descricao) {
     $imagem_url = $imagem->store('imagens/servicos','public');
     $retorno = Servico::create([
@@ -39,7 +37,6 @@ public function add(Request $request)
         'periodo_minimo' => $periodo_minimo,
         'imagem' => $imagem_url
     ]);
-
       return response()->json($retorno,201);
   } else {
     $array['erro'] = "Requisição mal formatada";
@@ -50,16 +47,16 @@ public function add(Request $request)
 //===========================================================
 // Lista todos Servicos GET
 //===========================================================
-    public function list(){
+public function list() {
 
-        $servicos = Servico::orderBy('nome')->get();
-      if ($servicos) {
-        return response()->json($servicos,200);
-      } else {
-        return response()->json(['erro'=>'Serviços não encontradas'],404);
-      }
+  $servicos = Servico::orderBy('nome')->get();
+  if ($servicos) {
+    return response()->json($servicos,200);
+  } else {
+    return response()->json(['erro'=>'Serviços não encontradas'],404);
+  }
 
-        }
+}
 
 
 
