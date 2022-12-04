@@ -23,20 +23,21 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+//User Controller ========================================================
 
 // Servico Controller ====================================================
 Route::get('/servicos', [ServicoController::class, 'list']);
 Route::post('/servicos', [ServicoController::class, 'add']);
 Route::get('/servico/{id}', [ServicoController::class, 'getById']);
 // Contratado Controller ====================================================
-//Route::get('/contratados', [ContratadoController::class, 'list']);
 Route::post('/contratados', 'App\Http\Controllers\ContratadoController@subscribe');  // adiciona um contratado
-Route::post('/contratados/deative', 'App\Http\Controllers\ContratadoController@deative');
-Route::post('/contratados/active', 'App\Http\Controllers\ContratadoController@active');
-Route::get('/contratados/{idServico}', 'App\Http\Controllers\ContratadoController@getContratadosByService');
+Route::post('/contratados/deactive', 'App\Http\Controllers\ContratadoController@deactive'); // desativa um contratado
+Route::post('/contratados/active', 'App\Http\Controllers\ContratadoController@active'); // reactiva um contratado
+Route::get('/contratados/{idServico}', 'App\Http\Controllers\ContratadoController@getContratadosByService'); // lista contratados por serviço
 // login controller =========================================================
 Route::post('/signin',[loginController::class,'signin']);
 Route::post('/signup',[loginController::class,'signup']);
 // User controller =========================================================
 Route::post('/avatar',[UserController::class,'updateAvatar']);
 Route::get('/user/{token}',[UserController::class,'getUser']);
+Route::post('/user/update',[UserController::class,'update']);

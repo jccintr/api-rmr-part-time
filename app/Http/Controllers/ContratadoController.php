@@ -65,17 +65,15 @@ foreach ($contratados as $contratado){
 //================================================================
 // Desativa um contratado POST
 //================================================================
-public function deative(Request $request){
+public function deactive(Request $request){
 
   $contratado_id = $request->contratado_id;
-
-
-
   $contratado = Contratado::find($contratado_id);
-  $contratado->ativo = false;
-  $contratado->save();
+
   if ($contratado) {
-     return response()->json($contratado,200);
+    $contratado->ativo = false;
+    $contratado->save();
+    return response()->json($contratado,200);
    } else {
      return response()->json(['erro'=>'Contratado não encontrado'],404);
    }
@@ -84,19 +82,19 @@ public function deative(Request $request){
 //================================================================
 // Ativa um contratado POST
 //================================================================
-public function ative(Request $request){
+public function active(Request $request){
 
-  $servico_id = $request->servico_id;
-  $user_id = $request->user_id;
+  $contratado_id = $request->contratado_id;
+  $contratado = Contratado::find($contratado_id);
 
-  $contratado = Contratado::where('servico_id',$servico_id)->where('user_id',$user_id)->first();
-  $contratado->ativo = true;
-  $contratado->save();
   if ($contratado) {
-     return response()->json($contratado,200);
+    $contratado->ativo = true;
+    $contratado->save();
+    return response()->json($contratado,200);
    } else {
      return response()->json(['erro'=>'Contratado não encontrado'],404);
    }
+
 }
 
 }
