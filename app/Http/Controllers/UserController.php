@@ -13,6 +13,7 @@ public function updateAvatar(Request $request) {
 
     $userId = $request->userId;
     $imagem = $request->file('imagem');
+    //dd($imagem);
 
     if ($userId and $imagem){
 
