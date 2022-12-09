@@ -7,6 +7,7 @@ use App\Http\Controllers\ServicoController;
 use App\http\Controllers\ContratadoController;
 use App\Http\Controllers\loginController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\ContratoController;
 
 /*
 |--------------------------------------------------------------------------
@@ -41,3 +42,7 @@ Route::post('/signup',[loginController::class,'signup']);
 Route::post('/avatar',[UserController::class,'updateAvatar']);
 Route::get('/user/{token}',[UserController::class,'getUser']);
 Route::post('/user/update',[UserController::class,'update']);
+// Contrato Controller ===================================================
+Route::post('/contratos',[ContratoController::class,'add']);
+Route::get('/contratos/cliente/{id}',[ContratoController::class,'getByCliente']);
+Route::get('/contratos/profissional/{id}',[ContratoController::class,'getByProfissional']);
