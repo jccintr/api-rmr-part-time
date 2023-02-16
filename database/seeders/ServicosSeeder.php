@@ -1,0 +1,156 @@
+<?php
+
+namespace Database\Seeders;
+
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
+
+use function Ramsey\Uuid\v1;
+
+class ServicosSeeder extends Seeder
+{
+    /**
+     * Run the database seeds.
+     *
+     * @return void
+     */
+    public function run()
+    {
+
+        DB::table('servicos')->insert([
+            'nome' => "Auxiliar de Serviços Gerais",
+            'descricao' => "Profissional capacitado para auxiliar em funções diversificadas.",
+            'valor_cliente' => 12,
+            'valor_profissional' => 10,
+            'unidade' => "hora",
+            'horario' => "8h as 17h30min",
+            'periodo_minimo' => "4",
+            'imagem' => "imagens/servicos/servicos-gerais.jpg",
+           
+        ]);
+
+        DB::table('servicos')->insert([
+            'nome' => "Cuidador de Idosos",
+            'descricao' => "Profissional especializado em ajudar idosos com necessidades básicas como higiene, alimentação, companhia e medicação.",
+            'valor_cliente' => 130,
+            'valor_profissional' => 110,
+            'unidade' => "diária",
+            'horario' => "A combinar",
+            'periodo_minimo' => "8",
+            'imagem' => "imagens/servicos/cuidador-idosos.jpg",
+           
+        ]);
+
+        DB::table('servicos')->insert([
+            'nome' => "Eletricista",
+            'descricao' => "Profissional especializado em reparos e instalação de sistemas elétricos.",
+            'valor_cliente' => 16,
+            'valor_profissional' => 14,
+            'unidade' => "hora",
+            'horario' => "8h as 17h30min",
+            'periodo_minimo' => "3",
+            'imagem' => "imagens/servicos/eletricista.jpg",
+           
+        ]);
+
+        DB::table('servicos')->insert([
+            'nome' => "Fretes e Carretos",
+            'descricao' => "Profissional especializado em transporte de mercadorias e mudanças.",
+            'valor_cliente' => 20,
+            'valor_profissional' => 18,
+            'unidade' => "hora",
+            'horario' => "8h as 17h30min",
+            'periodo_minimo' => "3",
+            'imagem' => "imagens/servicos/fretes-carretos.jpg",
+           
+        ]);
+
+        DB::table('servicos')->insert([
+            'nome' => "Limpeza de Condomínios",
+            'descricao' => "Profissional especializado na limpeza de condomínios.",
+            'valor_cliente' => 16,
+            'valor_profissional' => 14,
+            'unidade' => "hora",
+            'horario' => "8h as 17h30min",
+            'periodo_minimo' => "4",
+            'imagem' => "imagens/servicos/limpador-condominio.jpg",
+           
+        ]);
+
+        DB::table('servicos')->insert([
+            'nome' => "Limpeza de Estofados",
+            'descricao' => "Profissional especializado na higienilização  de estofados e colchões.",
+            'valor_cliente' => 16,
+            'valor_profissional' => 14,
+            'unidade' => "hora",
+            'horario' => "8h as 17h30min",
+            'periodo_minimo' => "4",
+            'imagem' => "imagens/servicos/limpador-estofados.jpg",
+           
+        ]);
+
+        DB::table('servicos')->insert([
+            'nome' => "Limpeza de Fim de Obras",
+            'descricao' => "Profissional especializado na remoção de resíduos de obras diversas.",
+            'valor_cliente' => 16,
+            'valor_profissional' => 14,
+            'unidade' => "hora",
+            'horario' => "8h as 17h30min",
+            'periodo_minimo' => "5",
+            'imagem' => "imagens/servicos/limpador-obras.jpg",
+           
+        ]);
+
+        DB::table('servicos')->insert([
+            'nome' => "Pedreiro",
+            'descricao' => "Profissional especializado em construir alicerces, levantar paredes,  muros, construções e rebocar estruturas construidas.",
+            'valor_cliente' => 120,
+            'valor_profissional' => 110,
+            'unidade' => "diária",
+            'horario' => "8h as 17h30min",
+            'periodo_minimo' => "0",
+            'imagem' => "imagens/servicos/pedreiro.jpg",
+           
+        ]);
+
+        DB::table('servicos')->insert([
+            'nome' => "Pintor",
+            'descricao' => "Profissional especializado em construir alicerces, levantar paredes,  muros, construções e rebocar estruturas construidas.",
+            'valor_cliente' => 120,
+            'valor_profissional' => 110,
+            'unidade' => "diária",
+            'horario' => "8h as 17h30min",
+            'periodo_minimo' => "0",
+            'imagem' => "imagens/servicos/pintor.jpg",
+           
+        ]);
+
+
+
+    }
+}
+
+
+/*
+
+	
+	
+	{
+		"id": 2,
+		"nome": "Pintor",
+		"descricao": "Profissional especializado em preparar e pintar superfícies externas e internas de edifícios e outras obras civis.",
+		"valor_cliente": 12000,
+		"valor_profissional": 11000,
+		"unidade": "diária",
+		"horario": "8h as 17h30min",
+		"periodo_minimo": "0",
+		"imagem": "imagens\/servicos\/0M8vzjUsJ694yzkO6TjkXoFrfe7NOpr9iih1S3vn.jpg",
+		"created_at": "2022-11-30T20:58:58.000000Z",
+		"updated_at": "2022-11-30T20:58:58.000000Z"
+	}
+]
+
+
+*/
+
