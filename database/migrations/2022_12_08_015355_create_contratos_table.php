@@ -23,10 +23,14 @@ return new class extends Migration
             $table->string('descricao')->nullable();
             $table->string('local')->nullable();
             $table->integer('quant')->default(1);
-            $table->integer('valor_unitario_cliente')->default(0);
-            $table->integer('valor_unitario_profissional')->default(0);
-            $table->integer('total_cliente')->default(0);
-            $table->integer('total_profissional')->default(0);
+            $table->decimal('valor_unitario_cliente', 5, 2)->default(0);
+            //$table->integer('valor_unitario_cliente')->default(0);
+            $table->decimal('valor_unitario_profissional', 5, 2)->default(0);
+            //$table->integer('valor_unitario_profissional')->default(0);
+            $table->decimal('total_cliente', 5, 2)->default(0);
+            //$table->integer('total_cliente')->default(0);
+            $table->decimal('total_profissional', 5, 2)->default(0);
+            //$table->integer('total_profissional')->default(0);
             $table->integer('status')->default(1);
             $table->timestamps();
             // cria o relacionamento com a tabela serviços
