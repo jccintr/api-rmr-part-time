@@ -84,10 +84,10 @@ public function getByProfissional($id){
 
   if ($contratos){
     foreach($contratos as $contrato) {
-      $contrato->valor_unitario_cliente = $contrato->valor_unitario_cliente / 100;
-      $contrato->valor_unitario_profissional = $contrato->valor_unitario_profissional / 100;
-      $contrato->total_cliente = $contrato->total_cliente / 100;
-      $contrato->total_profissional = $contrato->total_profissional / 100;
+      $contrato->valor_unitario_cliente = $contrato->valor_unitario_cliente;
+      $contrato->valor_unitario_profissional = $contrato->valor_unitario_profissional;
+      $contrato->total_cliente = $contrato->total_cliente;
+      $contrato->total_profissional = $contrato->total_profissional;
       $servico = Servico::find($contrato->servico_id);
       $contrato->servico = $servico;
       $cliente = User::find($contrato->cliente_id);
