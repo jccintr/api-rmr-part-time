@@ -210,7 +210,7 @@ class ServicosSeeder extends Seeder
             'unidade' => "diária",
             'horario' => "8h as 17h30min",
             'periodo_minimo' => "0",
-            'imagem' => "imagens/servicos/seguranca.jpg",
+            'imagem' => "imagens/servicos/manicure.jpg",
            
         ]);
 
@@ -222,7 +222,7 @@ class ServicosSeeder extends Seeder
             'unidade' => "diária",
             'horario' => "8h as 17h30min",
             'periodo_minimo' => "0",
-            'imagem' => "imagens/servicos/seguranca.jpg",
+            'imagem' => "imagens/servicos/piscineiro.jpg",
            
         ]);
 
