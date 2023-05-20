@@ -125,7 +125,17 @@ class ServicosSeeder extends Seeder
             'imagem' => "imagens/servicos/pintor.jpg",
            
         ]);
-
+        DB::table('servicos')->insert([
+            'nome' => "Diarista",
+            'descricao' => "Profissional especializado em faxinas em residencias.",
+            'valor_cliente' => 120,
+            'valor_profissional' => 110,
+            'unidade' => "diária",
+            'horario' => "8h as 17h30min",
+            'periodo_minimo' => "0",
+            'imagem' => "imagens/servicos/diarista.jpg",
+           
+        ]);
 
 
     }
