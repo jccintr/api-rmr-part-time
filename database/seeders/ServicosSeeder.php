@@ -18,7 +18,47 @@ class ServicosSeeder extends Seeder
     public function run()
     {
 
-        DB::table('servicos')->insert([
+        $nomes = [
+            'Paulo Cesar',
+            'Marco Antonio',
+            'Flávio',
+            'Dorival',
+            'Abel',
+            'João Carlos',
+            'José Luiz',
+            'Tiago',
+            'Mateus',
+            'Joaquim',
+            'Carlos',
+            'Miguel',
+            'Rafael',
+            'Isaias',
+            'Carlos Henrique',
+            'Marcia',
+            'Maria Aparecida',
+            'Ana Paula',
+            'Elisa',
+            'Daniela'
+        ];
+        $sobrenomes = [
+            'Pereira',
+            'Silva',
+            'Oliveira',
+            'Cintra',
+            'Ferreira',
+            'Martins',
+            'Noronha',
+            'Machado',
+            'Gomes',
+            'Azevedo',
+            'Almeida',
+            'Costa',
+            'Souza',
+            'Araujo',
+            'Ribeiro'
+        ];
+
+        $idServico = DB::table('servicos')->insertGetid([
             'nome' => "Auxiliar de Serviços Gerais",
             'descricao' => "Profissional capacitado para auxiliar em funções diversificadas.",
             'valor_cliente' => 12,
@@ -29,7 +69,11 @@ class ServicosSeeder extends Seeder
             'imagem' => "imagens/servicos/servicos-gerais.jpg",
            
         ]);
+/*
+        for($i=0;$i<15;$i++) {
 
+        }
+*/
         DB::table('servicos')->insert([
             'nome' => "Cuidador de Idosos",
             'descricao' => "Profissional especializado em ajudar idosos com necessidades básicas como higiene, alimentação, companhia e medicação.",
@@ -136,7 +180,51 @@ class ServicosSeeder extends Seeder
             'imagem' => "imagens/servicos/diarista.jpg",
            
         ]);
+        DB::table('servicos')->insert([
+            'nome' => "Jardineiro",
+            'descricao' => "Profissional especializado em manutenção de jardins e poda de árvores.",
+            'valor_cliente' => 120,
+            'valor_profissional' => 110,
+            'unidade' => "diária",
+            'horario' => "8h as 17h30min",
+            'periodo_minimo' => "0",
+            'imagem' => "imagens/servicos/jardineiro.jpg",
+           
+        ]);
+        DB::table('servicos')->insert([
+            'nome' => "Segurança",
+            'descricao' => "Profissional especializado em segurança de estabelecimentos ou eventos.",
+            'valor_cliente' => 120,
+            'valor_profissional' => 110,
+            'unidade' => "diária",
+            'horario' => "8h as 17h30min",
+            'periodo_minimo' => "0",
+            'imagem' => "imagens/servicos/seguranca.jpg",
+           
+        ]);
+        DB::table('servicos')->insert([
+            'nome' => "Manicure",
+            'descricao' => "Profissional especializado em tratamento estético em mãos e pés.",
+            'valor_cliente' => 120,
+            'valor_profissional' => 110,
+            'unidade' => "diária",
+            'horario' => "8h as 17h30min",
+            'periodo_minimo' => "0",
+            'imagem' => "imagens/servicos/seguranca.jpg",
+           
+        ]);
 
+        DB::table('servicos')->insert([
+            'nome' => "Piscineiro",
+            'descricao' => "Profissional especializado em limpeza e manutanção de piscinas.",
+            'valor_cliente' => 120,
+            'valor_profissional' => 110,
+            'unidade' => "diária",
+            'horario' => "8h as 17h30min",
+            'periodo_minimo' => "0",
+            'imagem' => "imagens/servicos/seguranca.jpg",
+           
+        ]);
 
     }
 }
