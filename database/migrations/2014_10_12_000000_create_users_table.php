@@ -24,10 +24,9 @@ return new class extends Migration
             $table->string('bairro')->nullable();
             $table->string('cidade')->nullable();
             $table->string('role');
-            $table->string('token')->nullable();
             $table->float('stars')->default(0);
             $table->string('imagem')->nullable();
-
+            $table->string('push_token')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->rememberToken();
             $table->timestamps();

@@ -19,8 +19,6 @@ return new class extends Migration
             $table->string('descricao');
             $table->decimal('valor_cliente', 5, 2)->default(0);
             $table->decimal('valor_profissional', 5, 2)->default(0);
-            //$table->integer('valor_cliente')->default(0);
-            //$table->integer('valor_profissional')->default(0);
             $table->string('unidade');
             $table->string('horario');
             $table->string('periodo_minimo');
