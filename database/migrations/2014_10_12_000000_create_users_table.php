@@ -23,9 +23,9 @@ return new class extends Migration
             $table->string('endereco')->nullable();
             $table->string('bairro')->nullable();
             $table->string('cidade')->nullable();
-            $table->string('role');
+            $table->integer('role'); // 0-admin 1-cliente 2-profissional
             $table->float('stars')->default(0);
-            $table->string('imagem')->nullable();
+            $table->string('avatar')->nullable();
             $table->string('push_token')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->rememberToken();

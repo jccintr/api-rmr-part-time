@@ -48,7 +48,7 @@ class ServicosSeeder extends Seeder
             'Ferreira',
             'Martins',
             'Noronha',
-            'Machado',
+            'Rodrigues',
             'Gomes',
             'Azevedo',
             'Almeida',
@@ -69,11 +69,7 @@ class ServicosSeeder extends Seeder
             'imagem' => "imagens/servicos/servicos-gerais.jpg",
            
         ]);
-/*
-        for($i=0;$i<15;$i++) {
 
-        }
-*/
         DB::table('servicos')->insert([
             'nome' => "Cuidador de Idosos",
             'descricao' => "Profissional especializado em ajudar idosos com necessidades básicas como higiene, alimentação, companhia e medicação.",

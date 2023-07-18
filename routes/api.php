@@ -8,6 +8,8 @@ use App\http\Controllers\ContratadoController;
 use App\Http\Controllers\loginController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ContratoController;
+use App\Http\Controllers\CategoriaController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -46,3 +48,6 @@ Route::post('/user/update',[UserController::class,'update']);
 Route::post('/contratos',[ContratoController::class,'add']);
 Route::get('/contratos/cliente/{id}',[ContratoController::class,'getByCliente']);
 Route::get('/contratos/profissional/{id}',[ContratoController::class,'getByProfissional']);
+// Categorias
+Route::get('/categorias', [CategoriaController::class, 'index']);
+Route::get('/categorias/{id}', [CategoriaController::class, 'show']);
