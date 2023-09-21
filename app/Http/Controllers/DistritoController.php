@@ -1,11 +1,11 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Models\Distrito;
 
 use Illuminate\Http\Request;
-use App\Models\Categoria;
 
-class CategoriaController extends Controller
+class DistritoController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,13 +14,8 @@ class CategoriaController extends Controller
      */
     public function index()
     {
-        $categorias = Categoria::orderBy('nome')->get();
-        if ($categorias) {
-          return response()->json($categorias,200);
-        } else {
-          return response()->json(['erro'=>'Categorias não encontradas.'],404);
-        }
-      
+        $distritos = Distrito::with('concelhos')->orderBy('nome')->get();
+        return response()->json($distritos,200);
     }
 
     /**
@@ -42,9 +37,7 @@ class CategoriaController extends Controller
      */
     public function show($id)
     {
-        $categoria = Categoria::with('worker.user.concelho.distrito')->find($id);
-        return response()->json($categoria,200);
-
+        //
     }
 
     /**

@@ -28,6 +28,7 @@ class User extends Authenticatable
         'cidade',
         'role',
         'stars',
+        'concelho_id',
         'avatar'
     ];
 
@@ -49,4 +50,8 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function concelho(){
+        return $this->hasOne(Concelho::class,'id','concelho_id');
+       }
 }

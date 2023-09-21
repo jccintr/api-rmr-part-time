@@ -1,26 +1,21 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Models\Concelho;
 
 use Illuminate\Http\Request;
-use App\Models\Categoria;
 
-class CategoriaController extends Controller
+class ConcelhoController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($distrito_id)
     {
-        $categorias = Categoria::orderBy('nome')->get();
-        if ($categorias) {
-          return response()->json($categorias,200);
-        } else {
-          return response()->json(['erro'=>'Categorias não encontradas.'],404);
-        }
-      
+        $concelhos = Concelho::where('distrito_id',$distrito_id)->orderBy('nome')->get();
+        return response()->json($concelhos,200);//
     }
 
     /**
@@ -42,9 +37,7 @@ class CategoriaController extends Controller
      */
     public function show($id)
     {
-        $categoria = Categoria::with('worker.user.concelho.distrito')->find($id);
-        return response()->json($categoria,200);
-
+        //
     }
 
     /**

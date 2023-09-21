@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('categorias', function (Blueprint $table) {
             $table->id();
             $table->string('nome');
+            $table->text('descricao');
             /*
             $table->string('descricao');
             $table->decimal('valor_cliente', 5, 2)->default(0);
