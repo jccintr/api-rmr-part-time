@@ -15,7 +15,8 @@ class OrcamentoController extends Controller
      */
     public function index()
     {
-        //
+        $orcamentos = Orcamento::where('user_id',Auth::User()->id)->with('categoria')->get();
+        return response()->json($orcamentos,200);
     }
 
     /**
@@ -26,6 +27,9 @@ class OrcamentoController extends Controller
      */
     public function store(Request $request)
     {
+
+
+      
         $user_id = Auth::User()->id;
         $categoria_id = $request->categoria_id;
         $descricao = $request->descricao;
@@ -34,14 +38,7 @@ class OrcamentoController extends Controller
         $distrito_id = $request->distrito_id;
         $concelho_id = $request->concelho_id;
         $imagem = $request->imagem;
-        
-        /*
-        if (!$categoria_id or !$nome or !$descricao or !$preco){
-            $array['erro'] = "Campos obrigatórios não informados.";
-            return response()->json($array,400);
-        }
-        */
-
+       
         $newOrcamento = new Orcamento();
         $newOrcamento->user_id = $user_id;
         $newOrcamento->categoria_id = $categoria_id;
@@ -55,7 +52,7 @@ class OrcamentoController extends Controller
             $newOrcamento->imagem = $imagem_url;
         }
         $newOrcamento->save();
-
+        //return response()->json(['result'=>$distrito_id],201);
         return response()->json($newOrcamento,201);
     }
 

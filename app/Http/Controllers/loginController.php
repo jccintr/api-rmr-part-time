@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Worker;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
@@ -39,6 +40,7 @@ class loginController extends Controller
         $telefone = $request->telefone;
         $role = $request->role;
         $concelho_id = $request->concelho_id;
+        $categoria_id = $request->categoria_id;
         if(!$name or !$email or !$password or !$telefone or !$concelho_id) {
             $array['erro'] = "Campos obrigatórios não informados.";
             return response()->json($array,400);
@@ -57,6 +59,13 @@ class loginController extends Controller
         $newUser->role = $role;
         $newUser->concelho_id = $concelho_id;
         $newUser->save();
+        // se role = 2 cadastrar worker
+        $newWorker = new Worker();
+        $newWorker->user_id = $newUser->id;
+        $newWorker->categoria_id = $categoria_id;
+        $newWorker->valor = 0;
+        $newWorker->unidade = "h";
+        $newWorker->save();
         //realiza login com o novo usuario
         $credentials = ['email'=> $newUser->email,'password'=>$password];
         if (!Auth::attempt($credentials)) {

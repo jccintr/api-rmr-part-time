@@ -11,4 +11,9 @@ class Orcamento extends Model
     protected $table ='orcamentos';
     protected $fillable = ['user_id','categoria_id','descricao','logradouro','numero','distrito_id','concelho_id','imagem'];
 
+
+    public function categoria(){
+        
+        return $this->hasOne(Categoria::class,'id','categoria_id');
+    }
 }

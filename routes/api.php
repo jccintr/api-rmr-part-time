@@ -60,3 +60,4 @@ Route::get('/distritos', [DistritoController::class, 'index']);
 Route::get('/concelhos/{id}', [ConcelhoController::class, 'index']);
 // Orçamentos
 Route::middleware('auth:sanctum')->post('/orcamentos', [OrcamentoController::class, 'store']);
+Route::middleware('auth:sanctum')->get('/orcamentos', [OrcamentoController::class, 'index']);
