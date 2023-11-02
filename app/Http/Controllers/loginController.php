@@ -60,12 +60,15 @@ class loginController extends Controller
         $newUser->concelho_id = $concelho_id;
         $newUser->save();
         // se role = 2 cadastrar worker
-        $newWorker = new Worker();
-        $newWorker->user_id = $newUser->id;
-        $newWorker->categoria_id = $categoria_id;
-        $newWorker->valor = 0;
-        $newWorker->unidade = "h";
-        $newWorker->save();
+        if ($role==2){
+            $newWorker = new Worker();
+            $newWorker->user_id = $newUser->id;
+            $newWorker->categoria_id = $categoria_id;
+            $newWorker->valor = 0;
+            $newWorker->unidade = "h";
+            $newWorker->save();
+        }
+        
         //realiza login com o novo usuario
         $credentials = ['email'=> $newUser->email,'password'=>$password];
         if (!Auth::attempt($credentials)) {
