@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Models\Orcamento;
+use App\Models\Proposta;
 
 class OrcamentoController extends Controller
 {
@@ -15,7 +16,8 @@ class OrcamentoController extends Controller
      */
     public function index()
     {
-        $orcamentos = Orcamento::where('user_id',Auth::User()->id)->with('categoria')->get();
+        $orcamentos = Orcamento::where('user_id',Auth::User()->id)->with('propostas')->with('categoria')->get();
+
         return response()->json($orcamentos,200);
     }
 
@@ -32,16 +34,18 @@ class OrcamentoController extends Controller
       
         $user_id = Auth::User()->id;
         $categoria_id = $request->categoria_id;
+        $titulo = $request->titulo;
         $descricao = $request->descricao;
         $logradouro = $request->logradouro;
         $numero = $request->numero;
         $distrito_id = $request->distrito_id;
         $concelho_id = $request->concelho_id;
         $imagem = $request->imagem;
-       
+        
         $newOrcamento = new Orcamento();
         $newOrcamento->user_id = $user_id;
         $newOrcamento->categoria_id = $categoria_id;
+        $newOrcamento->titulo = $titulo;
         $newOrcamento->descricao = $descricao;
         $newOrcamento->logradouro = $logradouro;
         $newOrcamento->numero = $numero;

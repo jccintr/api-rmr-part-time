@@ -21,6 +21,7 @@ return new class extends Migration
             $table->id();
             $table->foreignIdFor(User::class); // solicitante
             $table->foreignIdFor(Categoria::class);  // categoria: pintor, pedreiro...
+            $table->string('titulo')->nullable();
             $table->text('descricao')->nullable();
             $table->string('logradouro')->nullable();
             $table->string('numero')->nullable();

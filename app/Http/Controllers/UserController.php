@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use Illuminate\Support\Facades\Storage;
 
@@ -11,27 +12,24 @@ class UserController extends Controller
 
 public function updateAvatar(Request $request) {
 
-    $userId = $request->userId;
+    
     $imagem = $request->file('imagem');
-    //dd($imagem);
-
-    if ($userId and $imagem){
-
-        $usuario = User::find($userId);
-        if($usuario->imagem){
-            Storage::disk('public')->delete($usuario->imagem);
-        }
-
-        $imagem_url = $imagem->store('imagens/avatar','public');
-        $usuario->imagem = $imagem_url;
-        $usuario->save();
-        return response()->json($usuario,200);
-
-    } else {
-
+    if (!$imagem) {
         $array['erro'] = "Campos obrigatórios não informados.";
         return response()->json($array,400);
     }
+
+    $usuario = User::find(Auth::User()->id);
+    if($usuario->imagem){
+        Storage::disk('public')->delete($usuario->imagem);
+    }
+
+    $imagem_url = $imagem->store('imagens/avatar','public');
+    $usuario->imagem = $imagem_url;
+    $usuario->save();
+    return response()->json($usuario,200);
+
+    
 
 }
 public function getUser($token) {

@@ -39,7 +39,7 @@ Route::get('/servico/{id}', [ServicoController::class, 'getById']);
 Route::post('/login',[loginController::class,'login']);
 Route::post('/cadastro',[loginController::class,'cadastro']);
 // User controller =========================================================
-Route::post('/avatar',[UserController::class,'updateAvatar']);
+Route::middleware('auth:sanctum')->post('/avatar',[UserController::class,'updateAvatar']);
 Route::get('/user/{token}',[UserController::class,'getUser']);
 Route::post('/user/update',[UserController::class,'update']);
 // Categorias
