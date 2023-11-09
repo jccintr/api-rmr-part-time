@@ -3,6 +3,8 @@
 namespace App\Providers;
 
 // use Illuminate\Support\Facades\Gate;
+use Illuminate\Auth\Notifications\VerifyEmail;
+use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 
 class AuthServiceProvider extends ServiceProvider
@@ -25,6 +27,15 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-        //
-    }
+        VerifyEmail::toMailUsing(function($notifiable, $url){
+            $spaUrl = "http://spa.test?email_verify_url=".$url;
+
+            return (new MailMessage)
+                ->subject('Confirme o seu email')
+                ->line('Clique no botão abaixo para verificar o seu endereço de email.')
+                ->action('Verificar Email',$spaUrl);
+            
+
+        });
+     }
 }

@@ -12,6 +12,7 @@ use App\Http\Controllers\CategoriaController;
 use App\Http\Controllers\DistritoController;
 use App\Http\Controllers\ConcelhoController;
 use App\Http\Controllers\OrcamentoController;
+use App\Http\Controllers\EmailVerificationController;
 
 
 /*
@@ -31,13 +32,11 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 //User Controller ========================================================
 
-// Servico Controller ====================================================
-Route::get('/servicos', [ServicoController::class, 'list']);
-Route::post('/servicos', [ServicoController::class, 'add']);
-Route::get('/servico/{id}', [ServicoController::class, 'getById']);
 // login controller =========================================================
 Route::post('/login',[loginController::class,'login']);
 Route::post('/cadastro',[loginController::class,'cadastro']);
+Route::middleware('auth:sanctum')->post('/verifyemail', [loginController::class, 'verifyEmail']);
+Route::middleware('auth:sanctum')->post('/sendverificationemail', [loginController::class, 'sendVerificationEmail']);
 // User controller =========================================================
 Route::middleware('auth:sanctum')->post('/avatar',[UserController::class,'updateAvatar']);
 Route::get('/user/{token}',[UserController::class,'getUser']);
@@ -51,4 +50,8 @@ Route::get('/distritos', [DistritoController::class, 'index']);
 Route::get('/concelhos/{id}', [ConcelhoController::class, 'index']);
 // Orçamentos
 Route::middleware('auth:sanctum')->post('/orcamentos', [OrcamentoController::class, 'store']);
-Route::middleware('auth:sanctum')->get('/orcamentos', [OrcamentoController::class, 'index']);
+Route::middleware('auth:sanctum','verified')->get('/orcamentos', [OrcamentoController::class, 'index']);
+Route::middleware('auth:sanctum')->get('/orcamentos/{id}', [OrcamentoController::class, 'show']);
+// Email Verification
+//Route::middleware('auth:sanctum')->post('/send-email-notification', [EmailVerificationController::class, 'sendVerificationEmail']);
+//Route::middleware('auth:sanctum')->get('/email/verify/{id}/{hash}', [EmailVerificationController::class, 'verifyEmail'])->name('verification.verify');

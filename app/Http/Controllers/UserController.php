@@ -25,7 +25,7 @@ public function updateAvatar(Request $request) {
     }
 
     $imagem_url = $imagem->store('imagens/avatar','public');
-    $usuario->imagem = $imagem_url;
+    $usuario->avatar = $imagem_url;
     $usuario->save();
     return response()->json($usuario,200);
 

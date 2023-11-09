@@ -43,6 +43,10 @@ return new class extends Migration
             $table->float('stars')->default(0);
             $table->string('avatar')->nullable();
             $table->string('push_token')->nullable();
+
+            $table->string('verification_code')->nullable();
+            $table->timestamp('code_expire_at')->nullable();
+
             $table->timestamp('email_verified_at')->nullable();
             $table->rememberToken();
             $table->timestamps();

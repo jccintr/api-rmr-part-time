@@ -7,6 +7,10 @@ use App\Models\User;
 use App\Models\Worker;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Auth\Events\Registered;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\EmailVerification;
+
 
 
 class loginController extends Controller
@@ -23,6 +27,7 @@ class loginController extends Controller
         if (!Auth::attempt($credentials)) {
             return response()->json(['erro'=>'Email e ou senha inválidos'],401);
         }
+        
 
         $token = Auth::User()->createToken('rmr');
         $loggedUser = Auth::User();
@@ -58,6 +63,10 @@ class loginController extends Controller
         $newUser->telefone = $telefone;
         $newUser->role = $role;
         $newUser->concelho_id = $concelho_id;
+        // codigo de verificação do email
+        $newUser->verification_code = rand(100000,999999);
+        $newUser->code_expire_at = date("Y-m-d H:i:s",time() + 1800);
+
         $newUser->save();
         // se role = 2 cadastrar worker
         if ($role==2){
@@ -68,7 +77,10 @@ class loginController extends Controller
             $newWorker->unidade = "h";
             $newWorker->save();
         }
+
         
+        //event(new Registered($newUser));
+        //$newUser->markEmailAsVerified();
         //realiza login com o novo usuario
         $credentials = ['email'=> $newUser->email,'password'=>$password];
         if (!Auth::attempt($credentials)) {
@@ -77,12 +89,51 @@ class loginController extends Controller
         $loggedUser = Auth::User();
         $token = Auth::User()->createToken('rmr');
         $loggedUser['token'] = $token->plainTextToken;
+        // envia o email de confirmação de email
+        Mail::to(Auth::User())->send(new EmailVerification($newUser->verification_code));
         return response()->json($loggedUser,201);
 
             
            }
 
+           
+   public function sendVerificationEmail(Request $request) {
+
+        if (Auth::User()->hasVerifiedEmail()){
+            return response()->json(['mensagem'=>'Email já verificado'],401);
+        }
+
+        $user = User::find(Auth::User()->id);
+        $user->verification_code = rand(100000,999999);
+        $user->code_expire_at = date("Y-m-d H:i:s",time() + 1800);
+        $user->save();
+        Mail::to(Auth::User())->send(new EmailVerification($code));
+        return response()->json(['mensagem'=>'Código de verificação enviado'],200);
+    }
    
+
+    public function verifyEmail(Request $request) {
+
+        $codigo = $request->codigo;
+
+        if (Auth::User()->hasVerifiedEmail()){
+            return response()->json(['mensagem'=>'Email já verificado'],401);
+        }
+
+        $now = date("Y-m-d H:i:s"); 
+        if ($now > Auth::User()->code_expire_at) {
+            return response()->json(['mensagem'=>'Código inválido'],401);
+        }
+
+        if ($codigo !== Auth::User()->verification_code){
+            return response()->json(['mensagem'=>'Código inválido'],401);
+        }
+      
+            Auth::User()->markEmailAsVerified();
+            return response()->json(['mensagem'=>'Email verificado com sucesso'],200);
+      
+
+    }
 
 
 }

@@ -56,7 +56,7 @@ class OrcamentoController extends Controller
             $newOrcamento->imagem = $imagem_url;
         }
         $newOrcamento->save();
-        //return response()->json(['result'=>$distrito_id],201);
+        
         return response()->json($newOrcamento,201);
     }
 
@@ -68,7 +68,9 @@ class OrcamentoController extends Controller
      */
     public function show($id)
     {
-        //
+        $orcamento = Orcamento::with('propostas')->with('categoria')->find($id);
+
+        return response()->json($orcamento,200);
     }
 
     /**
