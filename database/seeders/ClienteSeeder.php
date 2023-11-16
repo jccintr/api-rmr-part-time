@@ -17,11 +17,12 @@ class ClienteSeeder extends Seeder
     public function run()
     {
         $cliente_id = DB::table('users')->insertGetid([
-            'name' => 'Julio Cesar',
-            'email' => 'jccintr@gmail.com',
+            'name' => 'Fausto Silva',
+            'email' => 'faustao@gmail.com',
             'password' => Hash::make('123'),
             'role' => 1,
             'concelho_id' => rand(1,200),
+            'email_verified_at' =>  date("Y-m-d H:i:s") 
         ]);
 
         for ($i=1;$i<=10;$i++){
@@ -39,7 +40,7 @@ class ClienteSeeder extends Seeder
             ]);
 
             $propostas = rand(0,10);
-            for ($i=1;$i<=$propostas;$i++){
+            for ($j=1;$j<=$propostas;$j++){
 
                 DB::table('propostas')->insert([
                     'orcamento_id'=> $orcamento_id,
@@ -59,6 +60,7 @@ class ClienteSeeder extends Seeder
             'password' => Hash::make('123'),
             'role' => 1,
             'concelho_id' => rand(1,200),
+            'email_verified_at' =>  date("Y-m-d H:i:s") 
         ]);
         for ($i=1;$i<=10;$i++){
 
@@ -75,7 +77,7 @@ class ClienteSeeder extends Seeder
             ]);
 
             $propostas = rand(0,10);
-            for ($i=1;$i<=$propostas;$i++){
+            for ($j=1;$j<=$propostas;$j++){
 
                 DB::table('propostas')->insert([
                     'orcamento_id'=> $orcamento_id,
@@ -96,7 +98,7 @@ class ClienteSeeder extends Seeder
             'password' => Hash::make('123'),
             'role' => 1,
             'concelho_id' => rand(1,200),
-            
+            'email_verified_at' =>  date("Y-m-d H:i:s") 
         ]);
 
         for ($i=1;$i<=10;$i++){
@@ -114,7 +116,7 @@ class ClienteSeeder extends Seeder
             ]);
 
             $propostas = rand(0,10);
-            for ($i=1;$i<=$propostas;$i++){
+            for ($j=1;$j<=$propostas;$j++){
 
                 DB::table('propostas')->insert([
                     'orcamento_id'=> $orcamento_id,

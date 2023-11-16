@@ -47,6 +47,9 @@ return new class extends Migration
             $table->string('verification_code')->nullable();
             $table->timestamp('code_expire_at')->nullable();
 
+            $table->string('password_verification_code')->nullable();
+            $table->timestamp('password_code_expire_at')->nullable();
+
             $table->timestamp('email_verified_at')->nullable();
             $table->rememberToken();
             $table->timestamps();

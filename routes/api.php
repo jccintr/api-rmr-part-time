@@ -26,20 +26,18 @@ use App\Http\Controllers\EmailVerificationController;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
-
-//User Controller ========================================================
 
 // login controller =========================================================
 Route::post('/login',[loginController::class,'login']);
+Route::middleware('auth:sanctum')->post('/logout',[loginController::class,'logout']);
 Route::post('/cadastro',[loginController::class,'cadastro']);
 Route::middleware('auth:sanctum')->post('/verifyemail', [loginController::class, 'verifyEmail']);
 Route::middleware('auth:sanctum')->post('/sendverificationemail', [loginController::class, 'sendVerificationEmail']);
+Route::post('/sendrecoverypasswordmail', [loginController::class, 'sendRecoveryPasswordEmail']);
+Route::post('/changepassword', [loginController::class, 'changePassword']);
 // User controller =========================================================
 Route::middleware('auth:sanctum')->post('/avatar',[UserController::class,'updateAvatar']);
-Route::get('/user/{token}',[UserController::class,'getUser']);
+Route::middleware('auth:sanctum','verified')->get('/user',[UserController::class,'getUser']);
 Route::post('/user/update',[UserController::class,'update']);
 // Categorias
 Route::get('/categorias', [CategoriaController::class, 'index']);
@@ -55,3 +53,4 @@ Route::middleware('auth:sanctum')->get('/orcamentos/{id}', [OrcamentoController:
 // Email Verification
 //Route::middleware('auth:sanctum')->post('/send-email-notification', [EmailVerificationController::class, 'sendVerificationEmail']);
 //Route::middleware('auth:sanctum')->get('/email/verify/{id}/{hash}', [EmailVerificationController::class, 'verifyEmail'])->name('verification.verify');
+Route::post('/backHome', [DistritoController::class, 'backHome']);

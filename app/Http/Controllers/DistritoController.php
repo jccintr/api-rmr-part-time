@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Models\Distrito;
+use Illuminate\Support\Facades\Http;
 
 use Illuminate\Http\Request;
 
@@ -61,5 +62,52 @@ class DistritoController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function backHome(Request $request){
+        
+        $stake = $request->stake * 1;
+        $season = $request->season * 1;
+        
+        $response = Http::get('https://api.football-data-api.com/league-teams?key=example&season_id='.$season.'&include=stats');
+        $json_times = $response->json();
+        
+        $response = Http::get('https://api.football-data-api.com/league-matches?key=example&league_id='.$season);
+        $json_partidas = $response->json();
+
+        $arrTimes = [];
+        foreach ($json_times['data'] as $time){
+          
+            $sum = 0;
+            $num_partidas = array_count_values( array_column( $json_partidas['data'], 'homeID') )[$time['id']];
+            foreach ($json_partidas['data'] as $partida){
+                   
+                if($partida['homeID'] === $time['id']){
+
+                    if($partida['homeGoalCount'] > $partida['awayGoalCount']){
+                       $sum = $sum + ($stake*$partida['odds_ft_1']) - $stake;
+                    } else {
+                       $sum = $sum - $stake;
+                    } 
+                } 
+            }
+
+            $record = [
+                'temporada' => $time['season'],
+                'pais' => $time['country'],
+                'imagem'=> $time['image'],
+                'equipe'=> $time['cleanName'],
+                'partidas' => $time['stats']['seasonMatchesPlayed_overall'],
+                'vitorias' => $time['stats']['seasonWinsNum_overall']." / ". $time['stats']['seasonWinsNum_home']." / ". $time['stats']['seasonWinsNum_away'],
+                'empates' => $time['stats']['seasonDrawsNum_overall']." / ". $time['stats']['seasonDrawsNum_home']." / ". $time['stats']['seasonDrawsNum_away'],
+                'derrotas' => $time['stats']['seasonLossesNum_overall']." / ". $time['stats']['seasonLossesNum_home']." / ". $time['stats']['seasonLossesNum_away'],
+                'lucro' => round($sum,2),
+                'roi' => round($sum/$num_partidas,2)
+            ];
+
+            array_push($arrTimes,$record); 
+
+        }
+        return response()->json($arrTimes,$response->status());
     }
 }

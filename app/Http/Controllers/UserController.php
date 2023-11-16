@@ -32,15 +32,12 @@ public function updateAvatar(Request $request) {
     
 
 }
-public function getUser($token) {
 
-  $user = User::where('token',$token)->first();
+public function getUser(Request $request) {
 
-  if($user){
-      return response()->json($user,200);
-  } else {
-    return response()->json(['erro'=>'Usuário não encontrado'],404);
-  }
+  
+    return response()->json(Auth::User(),200);
+  
 
 }
 
