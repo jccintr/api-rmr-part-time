@@ -97,7 +97,7 @@ class DistritoController extends Controller
                 'pais' => $time['country'],
                 'imagem'=> $time['image'],
                 'equipe'=> $time['cleanName'],
-                'partidas' => $time['stats']['seasonMatchesPlayed_overall'],
+                'partidas' => $time['stats']['seasonMatchesPlayed_home'],
                 'vitorias' => $time['stats']['winPercentage_home'].'%',
                 'empates' => $time['stats']['drawPercentage_home'].'%',
                 'derrotas' => $time['stats']['losePercentage_home'].'%',
