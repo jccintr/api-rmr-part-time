@@ -53,4 +53,5 @@ Route::middleware('auth:sanctum')->get('/orcamentos/{id}', [OrcamentoController:
 // Email Verification
 //Route::middleware('auth:sanctum')->post('/send-email-notification', [EmailVerificationController::class, 'sendVerificationEmail']);
 //Route::middleware('auth:sanctum')->get('/email/verify/{id}/{hash}', [EmailVerificationController::class, 'verifyEmail'])->name('verification.verify');
-Route::post('/backHome', [DistritoController::class, 'backHome']);
+Route::post('/backHomeCasa', [DistritoController::class, 'backHomeCasa']);
+Route::post('/backHomeVisitante', [DistritoController::class, 'backHomeVisitante']);
