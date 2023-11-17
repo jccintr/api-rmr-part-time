@@ -55,3 +55,15 @@ Route::middleware('auth:sanctum')->get('/orcamentos/{id}', [OrcamentoController:
 //Route::middleware('auth:sanctum')->get('/email/verify/{id}/{hash}', [EmailVerificationController::class, 'verifyEmail'])->name('verification.verify');
 Route::post('/backHomeCasa', [DistritoController::class, 'backHomeCasa']);
 Route::post('/backHomeVisitante', [DistritoController::class, 'backHomeVisitante']);
+
+Route::post('/backDrawCasa', [DistritoController::class, 'backDrawCasa']);
+Route::post('/backDrawVisitante', [DistritoController::class, 'backDrawVisitante']);
+
+Route::post('/backAwayCasa', [DistritoController::class, 'backAwayCasa']);
+Route::post('/backAwayVisitante', [DistritoController::class, 'backAwayVisitante']);
+
+Route::post('/backOverCasa', [DistritoController::class, 'backOverCasa']);
+Route::post('/backOverVisitante', [DistritoController::class, 'backOverVisitante']);
+
+Route::post('/backUnderCasa', [DistritoController::class, 'backUnderCasa']);
+Route::post('/backUnderVisitante', [DistritoController::class, 'backUnderVisitante']);
