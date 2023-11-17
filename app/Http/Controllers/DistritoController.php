@@ -98,9 +98,9 @@ class DistritoController extends Controller
                 'imagem'=> $time['image'],
                 'equipe'=> $time['cleanName'],
                 'partidas' => $time['stats']['seasonMatchesPlayed_overall'],
-                'vitorias' => $time['stats']['seasonWinsNum_overall']." / ". $time['stats']['seasonWinsNum_home']." / ". $time['stats']['seasonWinsNum_away'],
-                'empates' => $time['stats']['seasonDrawsNum_overall']." / ". $time['stats']['seasonDrawsNum_home']." / ". $time['stats']['seasonDrawsNum_away'],
-                'derrotas' => $time['stats']['seasonLossesNum_overall']." / ". $time['stats']['seasonLossesNum_home']." / ". $time['stats']['seasonLossesNum_away'],
+                'vitorias' => $time['stats']['winPercentage_home'].'%',
+                'empates' => $time['stats']['drawPercentage_home'].'%',
+                'derrotas' => $time['stats']['losePercentage_home'].'%',
                 'lucro' => round($sum,2),
                 'roi' => round($sum/$num_partidas,2)
             ];
