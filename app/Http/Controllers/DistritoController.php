@@ -827,8 +827,7 @@ class DistritoController extends Controller
             foreach ($json_partidas['data'] as $partida){
                    
                 if($partida['homeID'] === $time['id']){
-
-                    if(($partida['homeGoalCount'] = 0 xor $partida['awayGoalCount'] = 0) or($partida['homeGoalCount'] = 0 and $partida['awayGoalCount'] = 0) ){
+                    if(($partida['homeGoalCount'] == 0 xor $partida['awayGoalCount'] == 0) or $partida['totalGoalCount'] == 0){
                        $sum = $sum + ($stake*$partida['odds_btts_no']) - $stake;
                     } else {
                        $sum = $sum - $stake;
@@ -883,7 +882,7 @@ class DistritoController extends Controller
                    
                 if($partida['awayID'] === $time['id']){
 
-                    if(($partida['homeGoalCount'] = 0 xor $partida['awayGoalCount'] = 0) or ($partida['homeGoalCount'] = 0 and $partida['awayGoalCount'] = 0) ){
+                    if(($partida['homeGoalCount'] == 0 xor $partida['awayGoalCount'] == 0) or $partida['totalGoalCount'] == 0){
                        $sum = $sum + ($stake*$partida['odds_btts_no']) - $stake;
                     } else {
                        $sum = $sum - $stake;
