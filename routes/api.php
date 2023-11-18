@@ -67,3 +67,9 @@ Route::post('/backOverVisitante', [DistritoController::class, 'backOverVisitante
 
 Route::post('/backUnderCasa', [DistritoController::class, 'backUnderCasa']);
 Route::post('/backUnderVisitante', [DistritoController::class, 'backUnderVisitante']);
+
+Route::post('/backBTTSCasa', [DistritoController::class, 'backBTTSCasa']);
+Route::post('/backBTTSVisitante', [DistritoController::class, 'backBTTSVisitante']);
+
+Route::post('/backBTTNCasa', [DistritoController::class, 'backBTTNCasa']);
+Route::post('/backBTTNVisitante', [DistritoController::class, 'backBTTNVisitante']);
