@@ -551,7 +551,7 @@ class DistritoController extends Controller
       
         $stake = $request->stake * 1;
         $season = $request->season * 1;
-        $under = $request->under;
+        $under = $request->under * 1;
         
         if($request->under==0.5){
              $odds = 'odds_ft_under05';
@@ -587,7 +587,7 @@ class DistritoController extends Controller
                    
                 if($partida['homeID'] === $time['id']){
 
-                    if($partida['totalGoalCount'] <= floor($under)){
+                    if($partida['totalGoalCount'] < $under){
                         $sum = $sum + ($stake*$partida[$odds]) - $stake;
                     } else {
                        $sum = $sum - $stake;
@@ -604,11 +604,11 @@ class DistritoController extends Controller
                     'imagem'=> $time['image'],
                     'equipe'=> $time['cleanName'],
                     'partidas' => $time['stats']['seasonMatchesPlayed_home'],
-                    'percentual_under_05' => $time['stats']['seasonUnder05Percentage_overall'],
-                    'percentual_under_15' => $time['stats']['seasonUnder15Percentage_overall'],
-                    'percentual_under_25' => $time['stats']['seasonUnder25Percentage_overall'],
-                    'percentual_under_35' => $time['stats']['seasonUnder35Percentage_overall'],
-                    'percentual_under_45' => $time['stats']['seasonUnder45Percentage_overall'],
+                    'percentual_under_05' => $time['stats']['seasonOver05Percentage_overall'],
+                    'percentual_under_15' => $time['stats']['seasonOver15Percentage_overall'],
+                    'percentual_under_25' => $time['stats']['seasonOver25Percentage_overall'],
+                    'percentual_under_35' => $time['stats']['seasonOver35Percentage_overall'],
+                    'percentual_under_45' => $time['stats']['seasonOver45Percentage_overall'],
                     'lucro' => round($sum,2),
                     'roi' => round($sum/$num_partidas,2)
                 ];
@@ -625,7 +625,7 @@ class DistritoController extends Controller
       
         $stake = $request->stake * 1;
         $season = $request->season * 1;
-        $under = $request->under;
+        $under = $request->under * 1;
         
         if($request->under==0.5){
              $odds = 'odds_ft_under05';
@@ -661,7 +661,7 @@ class DistritoController extends Controller
                    
                 if($partida['awayID'] === $time['id']){
 
-                    if($partida['totalGoalCount'] <= floor($under)){
+                    if($partida['totalGoalCount'] < $under){
                         $sum = $sum + ($stake*$partida[$odds]) - $stake;
                     } else {
                        $sum = $sum - $stake;
@@ -678,11 +678,11 @@ class DistritoController extends Controller
                     'imagem'=> $time['image'],
                     'equipe'=> $time['cleanName'],
                     'partidas' => $time['stats']['seasonMatchesPlayed_away'],
-                    'percentual_under_05' => $time['stats']['seasonUnder05Percentage_overall'],
-                    'percentual_under_15' => $time['stats']['seasonUnder15Percentage_overall'],
-                    'percentual_under_25' => $time['stats']['seasonUnder25Percentage_overall'],
-                    'percentual_under_35' => $time['stats']['seasonUnder35Percentage_overall'],
-                    'percentual_under_45' => $time['stats']['seasonUnder45Percentage_overall'],
+                    'percentual_under_05' => $time['stats']['seasonOver05Percentage_overall'],
+                    'percentual_under_15' => $time['stats']['seasonOver15Percentage_overall'],
+                    'percentual_under_25' => $time['stats']['seasonOver25Percentage_overall'],
+                    'percentual_under_35' => $time['stats']['seasonOver35Percentage_overall'],
+                    'percentual_under_45' => $time['stats']['seasonOver45Percentage_overall'],
                     'lucro' => round($sum,2),
                     'roi' => round($sum/$num_partidas,2)
                 ];
@@ -828,7 +828,7 @@ class DistritoController extends Controller
                    
                 if($partida['homeID'] === $time['id']){
 
-                    if($partida['homeGoalCount'] = 0 or $partida['awayGoalCount'] = 0){
+                    if(($partida['homeGoalCount'] = 0 xor $partida['awayGoalCount'] = 0) or($partida['homeGoalCount'] = 0 and $partida['awayGoalCount'] = 0) ){
                        $sum = $sum + ($stake*$partida['odds_btts_no']) - $stake;
                     } else {
                        $sum = $sum - $stake;
@@ -883,7 +883,7 @@ class DistritoController extends Controller
                    
                 if($partida['awayID'] === $time['id']){
 
-                    if($partida['homeGoalCount'] = 0 or $partida['awayGoalCount'] = 0){
+                    if(($partida['homeGoalCount'] = 0 xor $partida['awayGoalCount'] = 0) or ($partida['homeGoalCount'] = 0 and $partida['awayGoalCount'] = 0) ){
                        $sum = $sum + ($stake*$partida['odds_btts_no']) - $stake;
                     } else {
                        $sum = $sum - $stake;
