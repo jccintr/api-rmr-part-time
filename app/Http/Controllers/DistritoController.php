@@ -512,7 +512,7 @@ class DistritoController extends Controller
                 if($partida['awayID'] === $time['id']){
 
                     if($partida['totalGoalCount'] >= round($over,0)){
-                       $sum = $sum + ($stake*$partida['odds_ft_over05']) - $stake;
+                        $sum = $sum + ($stake*$partida[$odds]) - $stake;
                     } else {
                        $sum = $sum - $stake;
                     } 
