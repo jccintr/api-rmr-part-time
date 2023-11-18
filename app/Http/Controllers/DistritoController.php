@@ -604,9 +604,11 @@ class DistritoController extends Controller
                     'imagem'=> $time['image'],
                     'equipe'=> $time['cleanName'],
                     'partidas' => $time['stats']['seasonMatchesPlayed_home'],
-                    'percentual_vitorias' => $time['stats']['winPercentage_home'],
-                    'percentual_empates' => $time['stats']['drawPercentage_home'],
-                    'percentual_derrotas' => $time['stats']['losePercentage_home'],
+                    'percentual_under_05' => $time['stats']['seasonUnder05Percentage_overall'],
+                    'percentual_under_15' => $time['stats']['seasonUnder15Percentage_overall'],
+                    'percentual_under_25' => $time['stats']['seasonUnder25Percentage_overall'],
+                    'percentual_under_35' => $time['stats']['seasonUnder35Percentage_overall'],
+                    'percentual_under_45' => $time['stats']['seasonUnder45Percentage_overall'],
                     'lucro' => round($sum,2),
                     'roi' => round($sum/$num_partidas,2)
                 ];
@@ -676,9 +678,11 @@ class DistritoController extends Controller
                     'imagem'=> $time['image'],
                     'equipe'=> $time['cleanName'],
                     'partidas' => $time['stats']['seasonMatchesPlayed_away'],
-                    'percentual_vitorias' => $time['stats']['winPercentage_away'],
-                    'percentual_empates' => $time['stats']['drawPercentage_away'],
-                    'percentual_derrotas' => $time['stats']['losePercentage_away'],
+                    'percentual_under_05' => $time['stats']['seasonUnder05Percentage_overall'],
+                    'percentual_under_15' => $time['stats']['seasonUnder15Percentage_overall'],
+                    'percentual_under_25' => $time['stats']['seasonUnder25Percentage_overall'],
+                    'percentual_under_35' => $time['stats']['seasonUnder35Percentage_overall'],
+                    'percentual_under_45' => $time['stats']['seasonUnder45Percentage_overall'],
                     'lucro' => round($sum,2),
                     'roi' => round($sum/$num_partidas,2)
                 ];
