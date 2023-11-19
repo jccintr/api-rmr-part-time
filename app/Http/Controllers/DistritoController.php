@@ -914,6 +914,341 @@ class DistritoController extends Controller
         return response()->json($arrTimes,$response->status());
     }
 
+    public function layHomeCasa(Request $request){
+      
+        $stake = $request->stake * 1;
+        $season = $request->season * 1;
+      
+        $response = Http::get('https://api.football-data-api.com/league-teams?key=example&season_id='.$season.'&include=stats');
+        $json_times = $response->json();
+        
+        $response = Http::get('https://api.football-data-api.com/league-matches?key=example&league_id='.$season);
+        $json_partidas = $response->json();
+
+        $arrTimes = [];
+
+        foreach ($json_times['data'] as $time){
+          
+            $sum = 0;
+            $num_partidas = array_count_values( array_column( $json_partidas['data'], 'homeID') )[$time['id']];
+            
+
+            foreach ($json_partidas['data'] as $partida){
+                   
+                if($partida['homeID'] === $time['id']){
+
+                    if(($partida['homeGoalCount'] == $partida['awayGoalCount']) or ($partida['awayGoalCount'] > $partida['homeGoalCount'])){
+                        $sum = $sum + ($stake/($partida['odds_ft_1']+0.03)) - $stake;
+                    } else {
+                       $sum = $sum - $stake;
+                    } 
+                } 
+
+               
+            }
+
+           
+                $record = [
+                    'temporada' => $time['season'],
+                    'pais' => $time['country'],
+                    'imagem'=> $time['image'],
+                    'equipe'=> $time['cleanName'],
+                    'partidas' => $time['stats']['seasonMatchesPlayed_home'],
+                    'percentual_vitorias' => $time['stats']['winPercentage_home'],
+                    'percentual_empates' => $time['stats']['drawPercentage_home'],
+                    'percentual_derrotas' => $time['stats']['losePercentage_home'],
+                    'lucro' => round($sum,2),
+                    'roi' => round($sum/$num_partidas,2)
+                ];
+
+            
+
+            array_push($arrTimes,$record); 
+
+        }
+        return response()->json($arrTimes,$response->status());
+    }
+
+    public function layHomeVisitante(Request $request){
+
+        $stake = $request->stake * 1;
+        $season = $request->season * 1;
+      
+        $response = Http::get('https://api.football-data-api.com/league-teams?key=example&season_id='.$season.'&include=stats');
+        $json_times = $response->json();
+        
+        $response = Http::get('https://api.football-data-api.com/league-matches?key=example&league_id='.$season);
+        $json_partidas = $response->json();
+
+        $arrTimes = [];
+
+        foreach ($json_times['data'] as $time){
+          
+            $sum = 0;
+            $num_partidas = array_count_values( array_column( $json_partidas['data'], 'awayID') )[$time['id']];
+            
+
+            foreach ($json_partidas['data'] as $partida){
+                   
+                if($partida['awayID'] === $time['id']){
+
+                    if(($partida['homeGoalCount'] == $partida['awayGoalCount']) or ($partida['awayGoalCount'] > $partida['homeGoalCount'])){
+                        $sum = $sum + ($stake/($partida['odds_ft_1']+0.03)) - $stake;
+                    } else {
+                       $sum = $sum - $stake;
+                    } 
+                } 
+
+               
+            }
+
+           
+                $record = [
+                    'temporada' => $time['season'],
+                    'pais' => $time['country'],
+                    'imagem'=> $time['image'],
+                    'equipe'=> $time['cleanName'],
+                    'partidas' => $time['stats']['seasonMatchesPlayed_away'],
+                    'percentual_vitorias' => $time['stats']['winPercentage_away'],
+                    'percentual_empates' => $time['stats']['drawPercentage_away'],
+                    'percentual_derrotas' => $time['stats']['losePercentage_away'],
+                    'lucro' => round($sum,2),
+                    'roi' => round($sum/$num_partidas,2)
+                ];
+
+            
+
+            array_push($arrTimes,$record); 
+
+        }
+        return response()->json($arrTimes,$response->status());
+
+    }
+
+    public function layDrawCasa(Request $request){
+      
+        $stake = $request->stake * 1;
+        $season = $request->season * 1;
+      
+        $response = Http::get('https://api.football-data-api.com/league-teams?key=example&season_id='.$season.'&include=stats');
+        $json_times = $response->json();
+        
+        $response = Http::get('https://api.football-data-api.com/league-matches?key=example&league_id='.$season);
+        $json_partidas = $response->json();
+
+        $arrTimes = [];
+
+        foreach ($json_times['data'] as $time){
+          
+            $sum = 0;
+            $num_partidas = array_count_values( array_column( $json_partidas['data'], 'homeID') )[$time['id']];
+            
+
+            foreach ($json_partidas['data'] as $partida){
+                   
+                if($partida['homeID'] === $time['id']){
+                    if($partida['totalGoalCount'] > 0 and ($partida['awayGoalCount'] != $partida['homeGoalCount']) ){
+                        $sum = $sum + ($stake/($partida['odds_ft_x']+0.03)) - $stake;
+                    } else {
+                       $sum = $sum - $stake;
+                    } 
+                } 
+
+               
+            }
+
+           
+                $record = [
+                    'temporada' => $time['season'],
+                    'pais' => $time['country'],
+                    'imagem'=> $time['image'],
+                    'equipe'=> $time['cleanName'],
+                    'partidas' => $time['stats']['seasonMatchesPlayed_home'],
+                    'percentual_vitorias' => $time['stats']['winPercentage_home'],
+                    'percentual_empates' => $time['stats']['drawPercentage_home'],
+                    'percentual_derrotas' => $time['stats']['losePercentage_home'],
+                    'lucro' => round($sum,2),
+                    'roi' => round($sum/$num_partidas,2)
+                ];
+
+            
+
+            array_push($arrTimes,$record); 
+
+        }
+        return response()->json($arrTimes,$response->status());
+    }
+
+    public function layDrawVisitante(Request $request){
+
+        $stake = $request->stake * 1;
+        $season = $request->season * 1;
+      
+        $response = Http::get('https://api.football-data-api.com/league-teams?key=example&season_id='.$season.'&include=stats');
+        $json_times = $response->json();
+        
+        $response = Http::get('https://api.football-data-api.com/league-matches?key=example&league_id='.$season);
+        $json_partidas = $response->json();
+
+        $arrTimes = [];
+
+        foreach ($json_times['data'] as $time){
+          
+            $sum = 0;
+            $num_partidas = array_count_values( array_column( $json_partidas['data'], 'awayID') )[$time['id']];
+            
+
+            foreach ($json_partidas['data'] as $partida){
+                   
+                if($partida['awayID'] === $time['id']){
+
+                    if($partida['totalGoalCount'] > 0 and ($partida['awayGoalCount'] != $partida['homeGoalCount']) ){
+                        $sum = $sum + ($stake/($partida['odds_ft_x']+0.03)) - $stake;
+                    } else {
+                       $sum = $sum - $stake;
+                    } 
+                } 
+
+               
+            }
+
+           
+                $record = [
+                    'temporada' => $time['season'],
+                    'pais' => $time['country'],
+                    'imagem'=> $time['image'],
+                    'equipe'=> $time['cleanName'],
+                    'partidas' => $time['stats']['seasonMatchesPlayed_away'],
+                    'percentual_vitorias' => $time['stats']['winPercentage_away'],
+                    'percentual_empates' => $time['stats']['drawPercentage_away'],
+                    'percentual_derrotas' => $time['stats']['losePercentage_away'],
+                    'lucro' => round($sum,2),
+                    'roi' => round($sum/$num_partidas,2)
+                ];
+
+            
+
+            array_push($arrTimes,$record); 
+
+        }
+        return response()->json($arrTimes,$response->status());
+
+    }
+
+    public function layAwayCasa(Request $request){
+      
+        $stake = $request->stake * 1;
+        $season = $request->season * 1;
+      
+        $response = Http::get('https://api.football-data-api.com/league-teams?key=example&season_id='.$season.'&include=stats');
+        $json_times = $response->json();
+        
+        $response = Http::get('https://api.football-data-api.com/league-matches?key=example&league_id='.$season);
+        $json_partidas = $response->json();
+
+        $arrTimes = [];
+
+        foreach ($json_times['data'] as $time){
+          
+            $sum = 0;
+            $num_partidas = array_count_values( array_column( $json_partidas['data'], 'homeID') )[$time['id']];
+            
+
+            foreach ($json_partidas['data'] as $partida){
+                   
+                if($partida['homeID'] === $time['id']){
+                    if(($partida['awayGoalCount'] == $partida['homeGoalCount']) or ($partida['homeGoalCount'] > $partida['awayGoalCount'] ) ){
+                        $sum = $sum + ($stake/($partida['odds_ft_2']+0.03)) - $stake;
+                    } else {
+                       $sum = $sum - $stake;
+                    } 
+                } 
+
+               
+            }
+
+           
+                $record = [
+                    'temporada' => $time['season'],
+                    'pais' => $time['country'],
+                    'imagem'=> $time['image'],
+                    'equipe'=> $time['cleanName'],
+                    'partidas' => $time['stats']['seasonMatchesPlayed_home'],
+                    'percentual_vitorias' => $time['stats']['winPercentage_home'],
+                    'percentual_empates' => $time['stats']['drawPercentage_home'],
+                    'percentual_derrotas' => $time['stats']['losePercentage_home'],
+                    'lucro' => round($sum,2),
+                    'roi' => round($sum/$num_partidas,2)
+                ];
+
+            
+
+            array_push($arrTimes,$record); 
+
+        }
+        return response()->json($arrTimes,$response->status());
+    }
+
+    public function layAwayVisitante(Request $request){
+
+        $stake = $request->stake * 1;
+        $season = $request->season * 1;
+      
+        $response = Http::get('https://api.football-data-api.com/league-teams?key=example&season_id='.$season.'&include=stats');
+        $json_times = $response->json();
+        
+        $response = Http::get('https://api.football-data-api.com/league-matches?key=example&league_id='.$season);
+        $json_partidas = $response->json();
+
+        $arrTimes = [];
+
+        foreach ($json_times['data'] as $time){
+          
+            $sum = 0;
+            $num_partidas = array_count_values( array_column( $json_partidas['data'], 'awayID') )[$time['id']];
+            
+
+            foreach ($json_partidas['data'] as $partida){
+                   
+                if($partida['awayID'] === $time['id']){
+
+                   
+                        if(($partida['awayGoalCount'] == $partida['homeGoalCount']) or ($partida['homeGoalCount'] > $partida['awayGoalCount'] ) ){
+                            $sum = $sum + ($stake/($partida['odds_ft_2']+0.03)) - $stake;
+                        } else {
+                           $sum = $sum - $stake;
+                        } 
+                   
+                } 
+
+               
+            }
+
+           
+                $record = [
+                    'temporada' => $time['season'],
+                    'pais' => $time['country'],
+                    'imagem'=> $time['image'],
+                    'equipe'=> $time['cleanName'],
+                    'partidas' => $time['stats']['seasonMatchesPlayed_away'],
+                    'percentual_vitorias' => $time['stats']['winPercentage_away'],
+                    'percentual_empates' => $time['stats']['drawPercentage_away'],
+                    'percentual_derrotas' => $time['stats']['losePercentage_away'],
+                    'lucro' => round($sum,2),
+                    'roi' => round($sum/$num_partidas,2)
+                ];
+
+            
+
+            array_push($arrTimes,$record); 
+
+        }
+        return response()->json($arrTimes,$response->status());
+
+    }
+
+ 
+
  
    
 
