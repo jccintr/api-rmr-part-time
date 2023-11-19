@@ -938,7 +938,8 @@ class DistritoController extends Controller
                 if($partida['homeID'] === $time['id']){
 
                     if(($partida['homeGoalCount'] == $partida['awayGoalCount']) or ($partida['awayGoalCount'] > $partida['homeGoalCount'])){
-                        $sum = $sum + ($stake/($partida['odds_ft_1']+0.03)) - $stake;
+                       // VALOR STAKE/((VALOR ODD HOME+0,03)-1)
+                        $sum = $sum + ( $stake / ( $partida['odds_ft_1'] + 0.03 - 1 ) ); //- $stake;
                     } else {
                        $sum = $sum - $stake;
                     } 
@@ -993,7 +994,7 @@ class DistritoController extends Controller
                 if($partida['awayID'] === $time['id']){
 
                     if(($partida['homeGoalCount'] == $partida['awayGoalCount']) or ($partida['awayGoalCount'] > $partida['homeGoalCount'])){
-                        $sum = $sum + ($stake/($partida['odds_ft_1']+0.03)) - $stake;
+                        $sum = $sum + ( $stake / ( $partida['odds_ft_1'] + 0.03 - 1 ) ); //- $stake;
                     } else {
                        $sum = $sum - $stake;
                     } 
@@ -1048,7 +1049,7 @@ class DistritoController extends Controller
                    
                 if($partida['homeID'] === $time['id']){
                     if($partida['totalGoalCount'] > 0 and ($partida['awayGoalCount'] != $partida['homeGoalCount']) ){
-                        $sum = $sum + ($stake/($partida['odds_ft_x']+0.03)) - $stake;
+                        $sum = $sum + ( $stake / ( $partida['odds_ft_x'] + 0.03 - 1 ) ); //- $stake;
                     } else {
                        $sum = $sum - $stake;
                     } 
@@ -1103,7 +1104,7 @@ class DistritoController extends Controller
                 if($partida['awayID'] === $time['id']){
 
                     if($partida['totalGoalCount'] > 0 and ($partida['awayGoalCount'] != $partida['homeGoalCount']) ){
-                        $sum = $sum + ($stake/($partida['odds_ft_x']+0.03)) - $stake;
+                        $sum = $sum + ( $stake / ( $partida['odds_ft_x'] + 0.03 - 1 ) ); //- $stake;
                     } else {
                        $sum = $sum - $stake;
                     } 
@@ -1158,7 +1159,7 @@ class DistritoController extends Controller
                    
                 if($partida['homeID'] === $time['id']){
                     if(($partida['awayGoalCount'] == $partida['homeGoalCount']) or ($partida['homeGoalCount'] > $partida['awayGoalCount'] ) ){
-                        $sum = $sum + ($stake/($partida['odds_ft_2']+0.03)) - $stake;
+                        $sum = $sum + ( $stake / ( $partida['odds_ft_2'] + 0.03 - 1 ) ); //- $stake;
                     } else {
                        $sum = $sum - $stake;
                     } 
@@ -1214,7 +1215,7 @@ class DistritoController extends Controller
 
                    
                         if(($partida['awayGoalCount'] == $partida['homeGoalCount']) or ($partida['homeGoalCount'] > $partida['awayGoalCount'] ) ){
-                            $sum = $sum + ($stake/($partida['odds_ft_2']+0.03)) - $stake;
+                            $sum = $sum + ( $stake / ( $partida['odds_ft_2'] + 0.03 - 1 ) ); //- $stake;
                         } else {
                            $sum = $sum - $stake;
                         } 
