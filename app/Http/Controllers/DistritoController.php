@@ -1283,10 +1283,10 @@ class DistritoController extends Controller
                     'pais' => $time['country'],
                     'imagem'=> $time['image'],
                     'equipe'=> $time['cleanName'],
-                    'partidas' => $time['stats']['seasonMatchesPlayed_away'],
-                    'percentual_vitorias' => $time['stats']['winPercentage_away'],
-                    'percentual_empates' => $time['stats']['drawPercentage_away'],
-                    'percentual_derrotas' => $time['stats']['losePercentage_away'],
+                    'partidas' => $time['stats']['seasonMatchesPlayed_home'],
+                    'percentual_vitorias' => $time['stats']['winPercentage_home'],
+                    'percentual_empates' => $time['stats']['drawPercentage_home'],
+                    'percentual_derrotas' => $time['stats']['losePercentage_home'],
                     'lucro' => round($sum,2),
                     'roi' => round($sum/$num_partidas,2)
                 ];
@@ -1381,10 +1381,10 @@ class DistritoController extends Controller
                     'pais' => $time['country'],
                     'imagem'=> $time['image'],
                     'equipe'=> $time['cleanName'],
-                    'partidas' => $time['stats']['seasonMatchesPlayed_away'],
-                    'percentual_vitorias' => $time['stats']['winPercentage_away'],
-                    'percentual_empates' => $time['stats']['drawPercentage_away'],
-                    'percentual_derrotas' => $time['stats']['losePercentage_away'],
+                    'partidas' => $time['stats']['seasonMatchesPlayed_home'],
+                    'percentual_vitorias' => $time['stats']['winPercentage_home'],
+                    'percentual_empates' => $time['stats']['drawPercentage_home'],
+                    'percentual_derrotas' => $time['stats']['losePercentage_home'],
                     'lucro' => round($sum,2),
                     'roi' => round($sum/$num_partidas,2)
                 ];
@@ -1479,10 +1479,10 @@ class DistritoController extends Controller
                     'pais' => $time['country'],
                     'imagem'=> $time['image'],
                     'equipe'=> $time['cleanName'],
-                    'partidas' => $time['stats']['seasonMatchesPlayed_away'],
-                    'percentual_vitorias' => $time['stats']['winPercentage_away'],
-                    'percentual_empates' => $time['stats']['drawPercentage_away'],
-                    'percentual_derrotas' => $time['stats']['losePercentage_away'],
+                    'partidas' => $time['stats']['seasonMatchesPlayed_home'],
+                    'percentual_vitorias' => $time['stats']['winPercentage_home'],
+                    'percentual_empates' => $time['stats']['drawPercentage_home'],
+                    'percentual_derrotas' => $time['stats']['losePercentage_home'],
                     'lucro' => round($sum,2),
                     'roi' => round($sum/$num_partidas,2)
                 ];
@@ -1541,11 +1541,6 @@ class DistritoController extends Controller
 
 
     }
-
- 
-
- 
-   
 
  
 }
