@@ -82,3 +82,12 @@ Route::post('/layDrawVisitante', [DistritoController::class, 'layDrawVisitante']
 
 Route::post('/layAwayCasa', [DistritoController::class, 'layAwayCasa']);
 Route::post('/layAwayVisitante', [DistritoController::class, 'layAwayVisitante']);
+
+Route::post('/doubleChance1xCasa', [DistritoController::class, 'doubleChance1xCasa']);
+Route::post('/doubleChance1xVisitante', [DistritoController::class, 'doubleChance1xVisitante']);
+
+Route::post('/doubleChance12Casa', [DistritoController::class, 'doubleChance12Casa']);
+Route::post('/doubleChance12Visitante', [DistritoController::class, 'doubleChance12Visitante']);
+
+Route::post('/doubleChancex2Casa', [DistritoController::class, 'doubleChancex2Casa']);
+Route::post('/doubleChancex2Visitante', [DistritoController::class, 'doubleChancex2Visitante']);
