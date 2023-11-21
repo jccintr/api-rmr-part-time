@@ -1271,7 +1271,7 @@ class DistritoController extends Controller
                 if($partida['homeID'] === $time['id']){
 
                     if(($partida['homeGoalCount'] == $partida['awayGoalCount']) or ($partida['homeGoalCount'] > $partida['awayGoalCount'] )){
-                        $sum = $sum + ($stake/$partida['odds_doublechance_1']) - $stake;
+                        $sum = $sum + ($stake/$partida['odds_doublechance_1x']) - $stake;
                     } else {
                        $sum = $sum - $stake;
                     } 
@@ -1320,7 +1320,7 @@ class DistritoController extends Controller
                 if($partida['awayID'] === $time['id']){
 
                     if(($partida['homeGoalCount'] == $partida['awayGoalCount']) or ($partida['homeGoalCount'] > $partida['awayGoalCount'] )){
-                        $sum = $sum + ($stake/$partida['odds_doublechance_1']) - $stake;
+                        $sum = $sum + ($stake/$partida['odds_doublechance_1x']) - $stake;
                     } else {
                        $sum = $sum - $stake;
                     } 
