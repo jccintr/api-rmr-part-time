@@ -1553,6 +1553,8 @@ class DistritoController extends Controller
         $response = Http::get('https://api.football-data-api.com/league-matches?key=example&league_id='.$season);
         $json_partidas = $response->json();
 
+        $arrData = [];
+
         $sum = 0;
         $partidas = 0;
         $vitorias = 0;
@@ -1585,7 +1587,8 @@ class DistritoController extends Controller
             'lucro' => round($sum,2),
             'roi' => round($sum/$partidas,2)
         ];
-        return response()->json($record,$response->status());
+        array_push($arrData,$record); 
+        return response()->json($arrData,$response->status());
     }
 
     public function leagueBackHomeVisitante(Request $request){
@@ -1595,6 +1598,8 @@ class DistritoController extends Controller
         
         $response = Http::get('https://api.football-data-api.com/league-matches?key=example&league_id='.$season);
         $json_partidas = $response->json();
+
+        $arrData = [];
 
         $sum = 0;
         $partidas = 0;
@@ -1628,7 +1633,8 @@ class DistritoController extends Controller
             'lucro' => round($sum,2),
             'roi' => round($sum/$partidas,2)
         ];
-        return response()->json($record,$response->status());
+        array_push($arrData,$record); 
+        return response()->json($arrData,$response->status());
     }
 
     public function leagueBackDrawCasa(Request $request){
@@ -1638,6 +1644,8 @@ class DistritoController extends Controller
         
         $response = Http::get('https://api.football-data-api.com/league-matches?key=example&league_id='.$season);
         $json_partidas = $response->json();
+
+        $arrData = [];
 
         $sum = 0;
         $partidas = 0;
@@ -1671,7 +1679,8 @@ class DistritoController extends Controller
             'lucro' => round($sum,2),
             'roi' => round($sum/$partidas,2)
         ];
-        return response()->json($record,$response->status());
+        array_push($arrData,$record); 
+        return response()->json($arrData,$response->status());
     }
 
     public function leagueBackDrawVisitante(Request $request){
@@ -1681,6 +1690,8 @@ class DistritoController extends Controller
         
         $response = Http::get('https://api.football-data-api.com/league-matches?key=example&league_id='.$season);
         $json_partidas = $response->json();
+
+        $arrData = [];
 
         $sum = 0;
         $partidas = 0;
@@ -1714,7 +1725,8 @@ class DistritoController extends Controller
             'lucro' => round($sum,2),
             'roi' => round($sum/$partidas,2)
         ];
-        return response()->json($record,$response->status());
+        array_push($arrData,$record); 
+        return response()->json($arrData,$response->status());
     }
 
     public function leagueBackAwayCasa(Request $request){
@@ -1724,6 +1736,8 @@ class DistritoController extends Controller
         
         $response = Http::get('https://api.football-data-api.com/league-matches?key=example&league_id='.$season);
         $json_partidas = $response->json();
+
+        $arrData = [];
 
         $sum = 0;
         $partidas = 0;
@@ -1757,7 +1771,8 @@ class DistritoController extends Controller
             'lucro' => round($sum,2),
             'roi' => round($sum/$partidas,2)
         ];
-        return response()->json($record,$response->status());
+        array_push($arrData,$record); 
+        return response()->json($arrData,$response->status());
     }
 
     public function leagueBackAwayVisitante(Request $request){
@@ -1767,6 +1782,8 @@ class DistritoController extends Controller
         
         $response = Http::get('https://api.football-data-api.com/league-matches?key=example&league_id='.$season);
         $json_partidas = $response->json();
+
+        $arrData = [];
 
         $sum = 0;
         $partidas = 0;
@@ -1800,7 +1817,8 @@ class DistritoController extends Controller
             'lucro' => round($sum,2),
             'roi' => round($sum/$partidas,2)
         ];
-        return response()->json($record,$response->status());
+        array_push($arrData,$record); 
+        return response()->json($arrData,$response->status());
     }
  
 }
