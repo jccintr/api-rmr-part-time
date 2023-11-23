@@ -91,3 +91,13 @@ Route::post('/doubleChance12Visitante', [DistritoController::class, 'doubleChanc
 
 Route::post('/doubleChancex2Casa', [DistritoController::class, 'doubleChancex2Casa']);
 Route::post('/doubleChancex2Visitante', [DistritoController::class, 'doubleChancex2Visitante']);
+
+// =====================
+Route::post('/leagueBackHomeCasa', [DistritoController::class, 'leagueBackHomeCasa']);
+Route::post('/leagueBackHomeVisitante', [DistritoController::class, 'leagueBackHomeVisitante']);
+
+Route::post('/leagueBackDrawCasa', [DistritoController::class, 'leagueBackDrawCasa']);
+Route::post('/leagueBackDrawVisitante', [DistritoController::class, 'leagueBackDrawVisitante']);
+
+Route::post('/leagueAwayDrawCasa', [DistritoController::class, 'leagueBackAwayCasa']);
+Route::post('/leagueAwayDrawVisitante', [DistritoController::class, 'leagueBackAwayVisitante']);

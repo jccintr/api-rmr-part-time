@@ -1267,10 +1267,11 @@ class DistritoController extends Controller
             $num_partidas = array_count_values( array_column( $json_partidas['data'], 'homeID') )[$time['id']];
       
             foreach ($json_partidas['data'] as $partida){
-                   
+                 
                 if($partida['homeID'] === $time['id']){
 
                     if(($partida['homeGoalCount'] == $partida['awayGoalCount']) or ($partida['homeGoalCount'] > $partida['awayGoalCount'] )){
+                        dd($partida['id']);  
                         $sum = $sum + ($stake/$partida['odds_doublechance_1x']) - $stake;
                     } else {
                        $sum = $sum - $stake;
@@ -1542,5 +1543,264 @@ class DistritoController extends Controller
 
     }
 
+    // ================================================
+
+     public function leagueBackHomeCasa(Request $request){
+      
+        $stake = $request->stake * 1;
+        $season = $request->season * 1;
+        
+        $response = Http::get('https://api.football-data-api.com/league-matches?key=example&league_id='.$season);
+        $json_partidas = $response->json();
+
+        $sum = 0;
+        $partidas = 0;
+        $vitorias = 0;
+        $empates = 0;
+        $derrotas = 0;
+        foreach ($json_partidas['data'] as $partida){
+            
+                if($partida['homeGoalCount'] > $partida['awayGoalCount']){
+                    $sum = $sum + ($stake*$partida['odds_ft_1']) - $stake;
+                    $vitorias++;
+                } else {
+
+                    if($partida['homeGoalCount'] === $partida['awayGoalCount']){ 
+                        $empates++;
+                    } else {
+                        $derrotas++;
+                    }
+                    $sum = $sum - $stake;
+                } 
+                $partidas++;
+            
+        }
+        $record = [
+            'temporada' => '2018/2019',
+            'pais' => 'England',
+            'percentual_partidas' => 100,
+            'percentual_vitorias' => round($vitorias/$partidas*100,2),
+            'percentual_empates' => round($empates/$partidas*100,2),
+            'percentual_derrotas' => round($derrotas/$partidas*100,2),
+            'lucro' => round($sum,2),
+            'roi' => round($sum/$partidas,2)
+        ];
+        return response()->json($record,$response->status());
+    }
+
+    public function leagueBackHomeVisitante(Request $request){
+      
+        $stake = $request->stake * 1;
+        $season = $request->season * 1;
+        
+        $response = Http::get('https://api.football-data-api.com/league-matches?key=example&league_id='.$season);
+        $json_partidas = $response->json();
+
+        $sum = 0;
+        $partidas = 0;
+        $vitorias = 0;
+        $empates = 0;
+        $derrotas = 0;
+        foreach ($json_partidas['data'] as $partida){
+            
+                if($partida['homeGoalCount'] < $partida['awayGoalCount']){
+                    $sum = $sum + ($stake*$partida['odds_ft_1']) - $stake;
+                    $vitorias++;
+                } else {
+
+                    if($partida['homeGoalCount'] === $partida['awayGoalCount']){ 
+                        $empates++;
+                    } else {
+                        $derrotas++;
+                    }
+                    $sum = $sum - $stake;
+                } 
+                $partidas++;
+            
+        }
+        $record = [
+            'temporada' => '2018/2019',
+            'pais' => 'England',
+            'percentual_partidas' => 100,
+            'percentual_vitorias' => round($vitorias/$partidas*100,2),
+            'percentual_empates' => round($empates/$partidas*100,2),
+            'percentual_derrotas' => round($derrotas/$partidas*100,2),
+            'lucro' => round($sum,2),
+            'roi' => round($sum/$partidas,2)
+        ];
+        return response()->json($record,$response->status());
+    }
+
+    public function leagueBackDrawCasa(Request $request){
+      
+        $stake = $request->stake * 1;
+        $season = $request->season * 1;
+        
+        $response = Http::get('https://api.football-data-api.com/league-matches?key=example&league_id='.$season);
+        $json_partidas = $response->json();
+
+        $sum = 0;
+        $partidas = 0;
+        $vitorias = 0;
+        $empates = 0;
+        $derrotas = 0;
+        foreach ($json_partidas['data'] as $partida){
+            
+            if($partida['homeGoalCount'] === $partida['awayGoalCount']){ 
+                    $sum = $sum + ($stake*$partida['odds_ft_x']) - $stake;
+                    $empates++;
+                } else {
+
+                    if($partida['homeGoalCount'] > $partida['awayGoalCount']){ 
+                        $vitorias++;
+                    } else {
+                        $derrotas++;
+                    }
+                    $sum = $sum - $stake;
+                } 
+                $partidas++;
+            
+        }
+        $record = [
+            'temporada' => '2018/2019',
+            'pais' => 'England',
+            'percentual_partidas' => 100,
+            'percentual_vitorias' => round($vitorias/$partidas*100,2),
+            'percentual_empates' => round($empates/$partidas*100,2),
+            'percentual_derrotas' => round($derrotas/$partidas*100,2),
+            'lucro' => round($sum,2),
+            'roi' => round($sum/$partidas,2)
+        ];
+        return response()->json($record,$response->status());
+    }
+
+    public function leagueBackDrawVisitante(Request $request){
+      
+        $stake = $request->stake * 1;
+        $season = $request->season * 1;
+        
+        $response = Http::get('https://api.football-data-api.com/league-matches?key=example&league_id='.$season);
+        $json_partidas = $response->json();
+
+        $sum = 0;
+        $partidas = 0;
+        $vitorias = 0;
+        $empates = 0;
+        $derrotas = 0;
+        foreach ($json_partidas['data'] as $partida){
+            
+            if($partida['homeGoalCount'] === $partida['awayGoalCount']){ 
+                    $sum = $sum + ($stake*$partida['odds_ft_x']) - $stake;
+                    $empates++;
+                } else {
+
+                    if($partida['homeGoalCount'] < $partida['awayGoalCount']){ 
+                        $vitorias++;
+                    } else {
+                        $derrotas++;
+                    }
+                    $sum = $sum - $stake;
+                } 
+                $partidas++;
+            
+        }
+        $record = [
+            'temporada' => '2018/2019',
+            'pais' => 'England',
+            'percentual_partidas' => 100,
+            'percentual_vitorias' => round($vitorias/$partidas*100,2),
+            'percentual_empates' => round($empates/$partidas*100,2),
+            'percentual_derrotas' => round($derrotas/$partidas*100,2),
+            'lucro' => round($sum,2),
+            'roi' => round($sum/$partidas,2)
+        ];
+        return response()->json($record,$response->status());
+    }
+
+    public function leagueBackAwayCasa(Request $request){
+      
+        $stake = $request->stake * 1;
+        $season = $request->season * 1;
+        
+        $response = Http::get('https://api.football-data-api.com/league-matches?key=example&league_id='.$season);
+        $json_partidas = $response->json();
+
+        $sum = 0;
+        $partidas = 0;
+        $vitorias = 0;
+        $empates = 0;
+        $derrotas = 0;
+        foreach ($json_partidas['data'] as $partida){
+            
+              if($partida['homeGoalCount'] < $partida['awayGoalCount']){
+                    $sum = $sum + ($stake*$partida['odds_ft_2']) - $stake;
+                    $derrotas++;
+                } else {
+
+                    if($partida['homeGoalCount'] === $partida['awayGoalCount']){ 
+                        $empates++;
+                    } else {
+                        $vitorias++;
+                    }
+                    $sum = $sum - $stake;
+                } 
+                $partidas++;
+            
+        }
+        $record = [
+            'temporada' => '2018/2019',
+            'pais' => 'England',
+            'percentual_partidas' => 100,
+            'percentual_vitorias' => round($vitorias/$partidas*100,2),
+            'percentual_empates' => round($empates/$partidas*100,2),
+            'percentual_derrotas' => round($derrotas/$partidas*100,2),
+            'lucro' => round($sum,2),
+            'roi' => round($sum/$partidas,2)
+        ];
+        return response()->json($record,$response->status());
+    }
+
+    public function leagueBackAwayVisitante(Request $request){
+      
+        $stake = $request->stake * 1;
+        $season = $request->season * 1;
+        
+        $response = Http::get('https://api.football-data-api.com/league-matches?key=example&league_id='.$season);
+        $json_partidas = $response->json();
+
+        $sum = 0;
+        $partidas = 0;
+        $vitorias = 0;
+        $empates = 0;
+        $derrotas = 0;
+        foreach ($json_partidas['data'] as $partida){
+            
+               if($partida['homeGoalCount'] < $partida['awayGoalCount']){
+                    $sum = $sum + ($stake*$partida['odds_ft_2']) - $stake;
+                    $derrotas++;
+                } else {
+
+                    if($partida['homeGoalCount'] === $partida['awayGoalCount']){ 
+                        $empates++;
+                    } else {
+                        $vitorias++;
+                    }
+                    $sum = $sum - $stake;
+                } 
+                $partidas++;
+            
+        }
+        $record = [
+            'temporada' => '2018/2019',
+            'pais' => 'England',
+            'percentual_partidas' => 100,
+            'percentual_vitorias' => round($vitorias/$partidas*100,2),
+            'percentual_empates' => round($empates/$partidas*100,2),
+            'percentual_derrotas' => round($derrotas/$partidas*100,2),
+            'lucro' => round($sum,2),
+            'roi' => round($sum/$partidas,2)
+        ];
+        return response()->json($record,$response->status());
+    }
  
 }
