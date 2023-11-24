@@ -1608,15 +1608,15 @@ class DistritoController extends Controller
         $derrotas = 0;
         foreach ($json_partidas['data'] as $partida){
             
-                if($partida['homeGoalCount'] < $partida['awayGoalCount']){
+                if($partida['homeGoalCount'] > $partida['awayGoalCount']){
                     $sum = $sum + ($stake*$partida['odds_ft_1']) - $stake;
-                    $vitorias++;
+                    $derrotas++;
                 } else {
 
                     if($partida['homeGoalCount'] === $partida['awayGoalCount']){ 
                         $empates++;
                     } else {
-                        $derrotas++;
+                        $vitorias++;
                     }
                     $sum = $sum - $stake;
                 } 
