@@ -99,5 +99,5 @@ Route::post('/leagueBackHomeVisitante', [DistritoController::class, 'leagueBackH
 Route::post('/leagueBackDrawCasa', [DistritoController::class, 'leagueBackDrawCasa']);
 Route::post('/leagueBackDrawVisitante', [DistritoController::class, 'leagueBackDrawVisitante']);
 
-Route::post('/leagueAwayDrawCasa', [DistritoController::class, 'leagueBackAwayCasa']);
-Route::post('/leagueAwayDrawVisitante', [DistritoController::class, 'leagueBackAwayVisitante']);
+Route::post('/leagueBackAwayCasa', [DistritoController::class, 'leagueBackAwayCasa']);
+Route::post('/leagueBackAwayVisitante', [DistritoController::class, 'leagueBackAwayVisitante']);
