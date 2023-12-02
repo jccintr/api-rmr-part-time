@@ -21,6 +21,13 @@ class OrcamentoController extends Controller
         return response()->json($orcamentos,200);
     }
 
+    public function getAll()
+    {
+        $orcamentos = Orcamento::with('concelho')->with('distrito')->with('propostas')->with('categoria')->get();
+
+        return response()->json($orcamentos,200);
+    }
+
     /**
      * Store a newly created resource in storage.
      *

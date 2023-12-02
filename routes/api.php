@@ -49,6 +49,7 @@ Route::get('/concelhos/{id}', [ConcelhoController::class, 'index']);
 // Orçamentos
 Route::middleware('auth:sanctum')->post('/orcamentos', [OrcamentoController::class, 'store']);
 Route::middleware('auth:sanctum','verified')->get('/orcamentos', [OrcamentoController::class, 'index']);
+Route::middleware('auth:sanctum','verified')->get('/orcamentos/all', [OrcamentoController::class, 'getAll']);
 Route::middleware('auth:sanctum')->get('/orcamentos/{id}', [OrcamentoController::class, 'show']);
 // Email Verification
 //Route::middleware('auth:sanctum')->post('/send-email-notification', [EmailVerificationController::class, 'sendVerificationEmail']);

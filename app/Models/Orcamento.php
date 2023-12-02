@@ -21,5 +21,13 @@ class Orcamento extends Model
         return $this->hasMany(Proposta::class);
     }
 
+     public function distrito() {
+        return $this->hasOne(Distrito::class,'id','distrito_id');
+    }
+
+    public function concelho() {
+        return $this->hasOne(Concelho::class,'id','concelho_id');
+    }
+
     
 }

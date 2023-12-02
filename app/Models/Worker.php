@@ -9,7 +9,7 @@ class Worker extends Model
 {
     use HasFactory;
     protected $table ='workers';
-    protected $fillable = ['user_id','categoria_id','valor','unidade'];
+    protected $fillable = ['user_id','categoria_id'];
 
     protected $hidden = [
         'created_at',

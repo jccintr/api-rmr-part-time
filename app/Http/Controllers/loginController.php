@@ -55,11 +55,18 @@ class loginController extends Controller
         $role = $request->role;
         $concelho_id = $request->concelho_id;
         $categoria_id = $request->categoria_id;
-        if(!$name or !$email or !$password or !$telefone or !$concelho_id) {
+
+        if($role===1 and (!$name or !$email or !$password or !$telefone or !$concelho_id) ) {
             $array['erro'] = "Campos obrigatórios não informados.";
             return response()->json($array,400);
         }
-               
+        
+        if($role===2 and (!$name or !$email or !$password or !$telefone or !$concelho_id or !$categoria_id) ) {
+            $array['erro'] = "Campos obrigatórios não informados para o profissional.";
+            return response()->json($array,400);
+        }
+
+        
         $user = User::select()->where('email', $email)->first();
         if($user) {
             $array['erro'] = "Email já cadastrado.";
@@ -82,8 +89,6 @@ class loginController extends Controller
             $newWorker = new Worker();
             $newWorker->user_id = $newUser->id;
             $newWorker->categoria_id = $categoria_id;
-            $newWorker->valor = 0;
-            $newWorker->unidade = "h";
             $newWorker->save();
         }
 
