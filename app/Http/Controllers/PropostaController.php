@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
-use App\Models\Categoria;
+use App\Models\Proposta;
 
-class CategoriaController extends Controller
+class PropostaController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,24 +15,7 @@ class CategoriaController extends Controller
      */
     public function index()
     {
-        $categorias = Categoria::orderBy('nome')->get();
-        if ($categorias) {
-          return response()->json($categorias,200);
-        } else {
-          return response()->json(['erro'=>'Categorias não encontradas.'],404);
-        }
-      
-    }
-
-    public function index2()
-    {
-        $categorias = Categoria::with('orcamentos.propostas')->orderBy('nome')->get();
-        if ($categorias) {
-          return response()->json($categorias,200);
-        } else {
-          return response()->json(['erro'=>'Categorias não encontradas.'],404);
-        }
-      
+        //
     }
 
     /**
@@ -42,7 +26,19 @@ class CategoriaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $user_id = Auth::User()->id;
+        $orcamento_id = $request->orcamento_id;
+        $resposta = $request->resposta;
+        $valor = $request->valor;
+
+        $newProposta = new Proposta();
+        $newProposta->user_id = $user_id;
+        $newProposta->orcamento_id = $orcamento_id;
+        $newProposta->resposta = $resposta;
+        $newProposta->valor = $valor;
+        $newProposta->save();
+
+        return response()->json($newProposta,201);
     }
 
     /**
@@ -53,9 +49,7 @@ class CategoriaController extends Controller
      */
     public function show($id)
     {
-        $categoria = Categoria::with('worker.user.concelho.distrito')->find($id);
-        return response()->json($categoria,200);
-
+        //
     }
 
     /**

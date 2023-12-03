@@ -12,6 +12,7 @@ use App\Http\Controllers\CategoriaController;
 use App\Http\Controllers\DistritoController;
 use App\Http\Controllers\ConcelhoController;
 use App\Http\Controllers\OrcamentoController;
+use App\Http\Controllers\PropostaController;
 use App\Http\Controllers\EmailVerificationController;
 
 
@@ -41,6 +42,7 @@ Route::middleware('auth:sanctum','verified')->get('/user',[UserController::class
 Route::post('/user/update',[UserController::class,'update']);
 // Categorias
 Route::get('/categorias', [CategoriaController::class, 'index']);
+Route::middleware('auth:sanctum')->get('/categorias2', [CategoriaController::class, 'index2']);
 Route::get('/categorias/{id}', [CategoriaController::class, 'show']);
 // Distritos
 Route::get('/distritos', [DistritoController::class, 'index']);
@@ -51,9 +53,13 @@ Route::middleware('auth:sanctum')->post('/orcamentos', [OrcamentoController::cla
 Route::middleware('auth:sanctum','verified')->get('/orcamentos', [OrcamentoController::class, 'index']);
 Route::middleware('auth:sanctum','verified')->get('/orcamentos/all', [OrcamentoController::class, 'getAll']);
 Route::middleware('auth:sanctum')->get('/orcamentos/{id}', [OrcamentoController::class, 'show']);
-// Email Verification
-//Route::middleware('auth:sanctum')->post('/send-email-notification', [EmailVerificationController::class, 'sendVerificationEmail']);
-//Route::middleware('auth:sanctum')->get('/email/verify/{id}/{hash}', [EmailVerificationController::class, 'verifyEmail'])->name('verification.verify');
+// Propostas
+Route::middleware('auth:sanctum')->post('/propostas', [PropostaController::class, 'store']);
+
+
+
+
+// testes da stake house
 Route::post('/backHomeCasa', [DistritoController::class, 'backHomeCasa']);
 Route::post('/backHomeVisitante', [DistritoController::class, 'backHomeVisitante']);
 

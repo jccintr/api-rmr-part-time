@@ -19,4 +19,8 @@ class Categoria extends Model
     public function worker(){
         return $this->hasMany(Worker::class);
     }
+
+    public function orcamentos(){
+        return $this->hasMany(Orcamento::class);
+    }
 }
