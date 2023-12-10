@@ -14,4 +14,9 @@ class Proposta extends Model
     public function orcamento(){
         return $this->belongsTo(Orcamento::class);
     }
+
+    public function user(){
+        return $this->belongsTo(User::class);
+    }
+
 }

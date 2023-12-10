@@ -53,6 +53,7 @@ Route::middleware('auth:sanctum')->post('/orcamentos', [OrcamentoController::cla
 Route::middleware('auth:sanctum','verified')->get('/orcamentos', [OrcamentoController::class, 'index']);
 Route::middleware('auth:sanctum','verified')->get('/orcamentos/all', [OrcamentoController::class, 'getAll']);
 Route::middleware('auth:sanctum')->get('/orcamentos/{id}', [OrcamentoController::class, 'show']);
+Route::middleware('auth:sanctum')->get('/orcamentos/categoria/{id}', [OrcamentoController::class, 'getByCategory']);
 // Propostas
 Route::middleware('auth:sanctum')->post('/propostas', [PropostaController::class, 'store']);
 

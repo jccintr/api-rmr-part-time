@@ -25,7 +25,7 @@ class CategoriaController extends Controller
 
     public function index2()
     {
-        $categorias = Categoria::with('orcamentos.propostas')->orderBy('nome')->get();
+        $categorias = Categoria::withCount('orcamentos')->orderBy('nome')->get();
         if ($categorias) {
           return response()->json($categorias,200);
         } else {

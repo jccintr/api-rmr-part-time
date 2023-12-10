@@ -16,7 +16,7 @@ class OrcamentoController extends Controller
      */
     public function index()
     {
-        $orcamentos = Orcamento::where('user_id',Auth::User()->id)->with('propostas')->with('categoria')->get();
+        $orcamentos = Orcamento::where('user_id',Auth::User()->id)->with('concelho')->with('distrito')->with('propostas.user')->with('categoria')->get();
 
         return response()->json($orcamentos,200);
     }
@@ -24,6 +24,13 @@ class OrcamentoController extends Controller
     public function getAll()
     {
         $orcamentos = Orcamento::with('concelho')->with('distrito')->with('propostas')->with('categoria')->get();
+
+        return response()->json($orcamentos,200);
+    }
+
+    public function getByCategory($id){
+        
+        $orcamentos = Orcamento::where('categoria_id',$id)->with('concelho')->with('distrito')->withCount('propostas')->with('categoria')->get();
 
         return response()->json($orcamentos,200);
     }
@@ -75,7 +82,7 @@ class OrcamentoController extends Controller
      */
     public function show($id)
     {
-        $orcamento = Orcamento::with('propostas')->with('categoria')->find($id);
+        $orcamento = Orcamento::with('propostas')->with('distrito')->with('concelho')->with('categoria')->find($id);
 
         return response()->json($orcamento,200);
     }

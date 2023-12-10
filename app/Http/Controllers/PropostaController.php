@@ -5,6 +5,10 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Models\Proposta;
+use App\Models\Orcamento;
+use App\Models\User;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\PropostaRecebida;
 
 class PropostaController extends Controller
 {
@@ -37,7 +41,10 @@ class PropostaController extends Controller
         $newProposta->resposta = $resposta;
         $newProposta->valor = $valor;
         $newProposta->save();
-
+        //envia o email para o criador do orcamento avisando que recebeu uma nova proposta
+        $orcamento = Orcamento::find($orcamento_id);
+        $user_orcamento = User::find($orcamento->user_id);
+        Mail::to($user_orcamento->email)->send(new PropostaRecebida($user_orcamento->name,$orcamento->titulo));
         return response()->json($newProposta,201);
     }
 

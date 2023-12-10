@@ -19,9 +19,10 @@ class PropostaRecebida extends Mailable
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($user_name,$orcamento_titulo)
     {
-        //
+        $this->user_name = $user_name;
+        $this->orcamento_titulo = $orcamento_titulo;
     }
 
     /**
@@ -47,8 +48,8 @@ class PropostaRecebida extends Mailable
     {
        
         return new Content(
-            view: 'welcomeEmail',
-            with: ['user' => $this->user]
+            view: 'novaProposta',
+            with: ['user_name' => $this->user_name,'orcamento_titulo' => $this->orcamento_titulo]
         );
     }
 
