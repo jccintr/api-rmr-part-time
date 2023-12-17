@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Models\Categoria;
 use App\Models\Distrito;
 use App\Models\Concelho;
+use App\Models\Proposta;
 
 return new class extends Migration
 {
@@ -21,6 +22,7 @@ return new class extends Migration
             $table->id();
             $table->foreignIdFor(User::class); // solicitante
             $table->foreignIdFor(Categoria::class);  // categoria: pintor, pedreiro...
+            $table->foreignIdFor(Proposta::class)->nullable(); // solicitante
             $table->string('titulo')->nullable();
             $table->text('descricao')->nullable();
             $table->string('logradouro')->nullable();
@@ -28,7 +30,10 @@ return new class extends Migration
             $table->foreignIdFor(Distrito::class);
             $table->foreignIdFor(Concelho::class);
             $table->string('imagem')->nullable();
+            $table->integer('status')->default(0); // 0-aguardando propostas 1-proposta aceita
+            //$table->unsignedBigInteger('proposta_id');
             $table->timestamps();
+            //$table->foreign('proposta_id')->references('id')->on('propostas');
         });
     }
 

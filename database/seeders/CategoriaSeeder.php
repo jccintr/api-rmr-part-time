@@ -89,7 +89,8 @@ class CategoriaSeeder extends Seeder
                 'role' => 2,
                 'stars' => rand(3, 4).'.'.rand(0, 9),
                 'concelho_id' => rand(1,200),
-                'avatar' => "imagens/avatar/".$avatar
+                'avatar' => "imagens/avatar/".$avatar,
+                'email_verified_at' =>  date("Y-m-d H:i:s") 
             ]);
 
             DB::table('workers')->insert([
@@ -127,7 +128,8 @@ class CategoriaSeeder extends Seeder
                 'role' => 2,
                 'stars' => rand(3, 4).'.'.rand(0, 9),
                 'concelho_id' => rand(1,200),
-                'avatar' => "imagens/avatar/".$avatar
+                'avatar' => "imagens/avatar/".$avatar,
+                'email_verified_at' =>  date("Y-m-d H:i:s") 
             ]);
 
             DB::table('workers')->insert([
@@ -164,7 +166,8 @@ class CategoriaSeeder extends Seeder
                 'role' => 2,
                 'stars' => rand(3, 4).'.'.rand(0, 9),
                 'concelho_id' => rand(1,200),
-                'avatar' => "imagens/avatar/".$avatar
+                'avatar' => "imagens/avatar/".$avatar,
+                'email_verified_at' =>  date("Y-m-d H:i:s") 
             ]);
 
             DB::table('workers')->insert([
@@ -200,7 +203,8 @@ class CategoriaSeeder extends Seeder
                 'role' => 2,
                 'stars' => rand(3, 4).'.'.rand(0, 9),
                 'concelho_id' => rand(1,200),
-                'avatar' => "imagens/avatar/".$avatar
+                'avatar' => "imagens/avatar/".$avatar,
+                'email_verified_at' =>  date("Y-m-d H:i:s") 
             ]);
 
             DB::table('workers')->insert([
@@ -237,7 +241,8 @@ class CategoriaSeeder extends Seeder
                 'role' => 2,
                 'stars' => rand(3, 4).'.'.rand(0, 9),
                 'concelho_id' => rand(1,200),
-                'avatar' => "imagens/avatar/".$avatar
+                'avatar' => "imagens/avatar/".$avatar,
+                'email_verified_at' =>  date("Y-m-d H:i:s") 
             ]);
 
             DB::table('workers')->insert([
@@ -273,7 +278,8 @@ class CategoriaSeeder extends Seeder
                 'role' => 2,
                 'stars' => rand(3, 4).'.'.rand(0, 9),
                 'concelho_id' => rand(1,200),
-                'avatar' => "imagens/avatar/".$avatar
+                'avatar' => "imagens/avatar/".$avatar,
+                'email_verified_at' =>  date("Y-m-d H:i:s") 
             ]);
 
             DB::table('workers')->insert([
@@ -286,7 +292,7 @@ class CategoriaSeeder extends Seeder
 
 /**********************************************************/        
         $idCategoria = DB::table('categorias')->insertGetid([
-            'nome' => "Limpeza de Fim de Obras",
+            'nome' => "Limpeza de Obras",
             'imagem' => "imagens/servicos/limpador-obras.jpg",
             'descricao' => "Encontre os melhores profissionais para serviços de remoção de resíduos de obras em geral."
            
@@ -310,7 +316,8 @@ class CategoriaSeeder extends Seeder
                 'role' => 2,
                 'stars' => rand(3, 4).'.'.rand(0, 9),
                 'concelho_id' => rand(1,200),
-                'avatar' => "imagens/avatar/".$avatar
+                'avatar' => "imagens/avatar/".$avatar,
+                'email_verified_at' =>  date("Y-m-d H:i:s") 
             ]);
 
             DB::table('workers')->insert([
@@ -347,7 +354,8 @@ class CategoriaSeeder extends Seeder
                 'role' => 2,
                 'stars' => rand(3, 4).'.'.rand(0, 9),
                 'concelho_id' => rand(1,200),
-                'avatar' => "imagens/avatar/".$avatar
+                'avatar' => "imagens/avatar/".$avatar,
+                'email_verified_at' =>  date("Y-m-d H:i:s") 
             ]);
 
             DB::table('workers')->insert([
@@ -384,7 +392,8 @@ class CategoriaSeeder extends Seeder
                 'role' => 2,
                 'stars' => rand(3, 4).'.'.rand(0, 9),
                 'concelho_id' => rand(1,200),
-                'avatar' => "imagens/avatar/".$avatar
+                'avatar' => "imagens/avatar/".$avatar,
+                'email_verified_at' =>  date("Y-m-d H:i:s") 
             ]);
 
             DB::table('workers')->insert([
@@ -394,6 +403,22 @@ class CategoriaSeeder extends Seeder
             ]);
 
         }
+        $worker_id = DB::table('users')->insertGetid([
+            'name' => "Julio Cesar",
+            'email' => "jccintr@gmail.com",
+            'password' => Hash::make('123'),
+            'role' => 2,
+            'stars' => 0,
+            'concelho_id' => rand(1,200),
+            //'avatar' => "imagens/avatar/".$avatar,
+            'email_verified_at' =>  date("Y-m-d H:i:s") 
+        ]);
+
+        DB::table('workers')->insert([
+            'user_id' => $worker_id,
+            'categoria_id' => $idCategoria
+            
+        ]);
 /**********************************************************/        
         $idCategoria = DB::table('categorias')->insertGetid([
             'nome' => "Diaristas",
@@ -420,7 +445,8 @@ class CategoriaSeeder extends Seeder
                 'role' => 2,
                 'stars' => rand(3, 4).'.'.rand(0, 9),
                 'concelho_id' => rand(1,200),
-                'avatar' => "imagens/avatar/".$avatar
+                'avatar' => "imagens/avatar/".$avatar,
+                'email_verified_at' =>  date("Y-m-d H:i:s") 
             ]);
 
             DB::table('workers')->insert([
@@ -456,7 +482,8 @@ class CategoriaSeeder extends Seeder
                 'role' => 2,
                 'stars' => rand(3, 4).'.'.rand(0, 9),
                 'concelho_id' => rand(1,200),
-                'avatar' => "imagens/avatar/".$avatar
+                'avatar' => "imagens/avatar/".$avatar,
+                'email_verified_at' =>  date("Y-m-d H:i:s") 
             ]);
 
             DB::table('workers')->insert([
@@ -491,7 +518,8 @@ class CategoriaSeeder extends Seeder
                 'role' => 2,
                 'stars' => rand(3, 4).'.'.rand(0, 9),
                 'concelho_id' => rand(1,200),
-                'avatar' => "imagens/avatar/".$avatar
+                'avatar' => "imagens/avatar/".$avatar,
+                'email_verified_at' =>  date("Y-m-d H:i:s") 
             ]);
 
             DB::table('workers')->insert([
@@ -526,7 +554,8 @@ class CategoriaSeeder extends Seeder
                 'role' => 2,
                 'stars' => rand(3, 4).'.'.rand(0, 9),
                 'concelho_id' => rand(1,200),
-                'avatar' => "imagens/avatar/".$avatar
+                'avatar' => "imagens/avatar/".$avatar,
+                'email_verified_at' =>  date("Y-m-d H:i:s") 
             ]);
 
             DB::table('workers')->insert([
@@ -561,7 +590,8 @@ class CategoriaSeeder extends Seeder
                 'role' => 2,
                 'stars' => rand(3, 4).'.'.rand(0, 9),
                 'concelho_id' => rand(1,200),
-                'avatar' => "imagens/avatar/".$avatar
+                'avatar' => "imagens/avatar/".$avatar,
+                'email_verified_at' =>  date("Y-m-d H:i:s") 
             ]);
 
             DB::table('workers')->insert([

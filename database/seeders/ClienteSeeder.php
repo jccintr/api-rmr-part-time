@@ -129,6 +129,14 @@ class ClienteSeeder extends Seeder
             }
 
         }
-        
+// ==================================================================================================
+        $cliente_id = DB::table('users')->insertGetid([
+            'name' => 'Getulio Lima',
+            'email' => 'afvbrascol1@gmail.com',
+            'password' => Hash::make('123'),
+            'role' => 1,
+            'concelho_id' => rand(1,200),
+            'email_verified_at' =>  date("Y-m-d H:i:s") 
+        ]);        
     }
 }

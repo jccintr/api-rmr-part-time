@@ -22,6 +22,7 @@ return new class extends Migration
             $table->foreignIdFor(User::class); // user->worker
             $table->text('resposta')->nullable();
             $table->decimal('valor', 5, 2)->default(0);
+            $table->boolean('aceita')->default(false);
             $table->timestamps();
         });
     }
