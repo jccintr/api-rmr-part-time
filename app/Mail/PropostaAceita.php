@@ -34,7 +34,7 @@ class PropostaAceita extends Mailable
     public function envelope()
     {
         return new Envelope(
-            from: new Address('contato@delivroo.app.br', 'RMR Part Time'),
+            from: new Address('contato@rmrparttime.com', 'RMR Part Time'),
             subject: 'Sua proposta foi aceita',
         );
     }

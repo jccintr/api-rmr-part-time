@@ -9,7 +9,7 @@ class Orcamento extends Model
 {
     use HasFactory;
     protected $table ='orcamentos';
-    protected $fillable = ['user_id','categoria_id','titulo','descricao','logradouro','numero','distrito_id','concelho_id','imagem'];
+    protected $fillable = ['user_id','categoria_id','proposta_id','titulo','descricao','logradouro','numero','distrito_id','concelho_id','imagem'];
 
 
     public function categoria(){

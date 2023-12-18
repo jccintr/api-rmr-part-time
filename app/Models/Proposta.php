@@ -9,7 +9,7 @@ class Proposta extends Model
 {
     use HasFactory;
     protected $table ='propostas';
-    protected $fillable = ['orcamento_id','user_id','resposta','valor'];
+    protected $fillable = ['orcamento_id','user_id','resposta','valor','aceita'];
 
     public function orcamento(){
         return $this->belongsTo(Orcamento::class);

@@ -61,6 +61,7 @@ Route::middleware('auth:sanctum')->post('/propostas', [PropostaController::class
 
 
 // testes da stake house
+/*
 Route::post('/backHomeCasa', [DistritoController::class, 'backHomeCasa']);
 Route::post('/backHomeVisitante', [DistritoController::class, 'backHomeVisitante']);
 
@@ -109,3 +110,4 @@ Route::post('/leagueBackDrawVisitante', [DistritoController::class, 'leagueBackD
 
 Route::post('/leagueBackAwayCasa', [DistritoController::class, 'leagueBackAwayCasa']);
 Route::post('/leagueBackAwayVisitante', [DistritoController::class, 'leagueBackAwayVisitante']);
+*/
