@@ -68,7 +68,20 @@ class PropostaController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $proposta = Proposta::find($id);
+        if(!$proposta){
+            return response()->json(['error'=>'Proposta não encontrada.'],404);
+        }
+        $orcamento = Orcamento::find($proposta->orcamento_id);
+        if(!$orcamento){
+            return response()->json(['error'=>'Orçamento não encontrado.'],404);
+        }
+        $orcamento->proposta_id = $proposta->id;
+        $orcamento->status = 1;
+        $orcamento->save();
+        $proposta->aceita = true;
+        $proposta->save();
+        return response()->json($proposta,200);
     }
 
     /**
@@ -79,6 +92,11 @@ class PropostaController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $proposta = Proposta::find($id);
+        if(!$proposta){
+            return response()->json(['error'=>'Proposta não encontrada.'],404);
+        }
+        $proposta->delete();
+        return response()->json(['message'=>'Proposta excluída com sucesso.'],200);
     }
 }

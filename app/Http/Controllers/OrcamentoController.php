@@ -23,14 +23,14 @@ class OrcamentoController extends Controller
 
     public function getAll()
     {
-        $orcamentos = Orcamento::with('concelho')->with('distrito')->with('propostas')->with('categoria')->get();
+        $orcamentos = Orcamento::where('status',0)->with('concelho')->with('distrito')->with('propostas')->with('categoria')->get();
 
         return response()->json($orcamentos,200);
     }
 
     public function getByCategory($id){
         
-        $orcamentos = Orcamento::where('categoria_id',$id)->with('concelho')->with('distrito')->withCount('propostas')->with('categoria')->get();
+        $orcamentos = Orcamento::where('categoria_id',$id)->where('status',0)->with('concelho')->with('distrito')->withCount('propostas')->with('categoria')->get();
 
         return response()->json($orcamentos,200);
     }
