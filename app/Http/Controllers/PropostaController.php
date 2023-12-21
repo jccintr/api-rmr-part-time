@@ -9,6 +9,7 @@ use App\Models\Orcamento;
 use App\Models\User;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\PropostaRecebida;
+use App\Mail\PropostaAceita;
 
 class PropostaController extends Controller
 {
@@ -76,11 +77,14 @@ class PropostaController extends Controller
         if(!$orcamento){
             return response()->json(['error'=>'Orçamento não encontrado.'],404);
         }
+        $user_proposta = User::find($proposta->user_id);
+        $user_orcamento = User::find($orcamento->user_id);
         $orcamento->proposta_id = $proposta->id;
         $orcamento->status = 1;
         $orcamento->save();
         $proposta->aceita = true;
         $proposta->save();
+        Mail::to($user_proposta->email)->send(new PropostaAceita($user_orcamento->name,$user_proposta->name,$orcamento->titulo));
         return response()->json($proposta,200);
     }
 
