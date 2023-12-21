@@ -311,7 +311,7 @@
               <tr>
                 <td class="wrapper">
                   <p>Olá {{ $user_name}}</p>
-                  <p>Você recebeu uma nova proposta no seu orçamento : {{ $orcamento_titulo }}.</p>
+                  <p>Você recebeu uma nova proposta no seu orçamento <span style="font-weight: bold;">{{ $orcamento_titulo }}</span>.</p>
                   <p>Atenciosamente</p>
                   <p>Equipa RMR Part-time.</p>
                 </td>
