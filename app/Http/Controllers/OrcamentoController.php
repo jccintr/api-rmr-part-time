@@ -55,6 +55,7 @@ class OrcamentoController extends Controller
         $distrito_id = $request->distrito_id;
         $concelho_id = $request->concelho_id;
         $imagem = $request->imagem;
+        $data_execucao = $request->data_execucao;
         
         $newOrcamento = new Orcamento();
         $newOrcamento->user_id = $user_id;
@@ -65,6 +66,7 @@ class OrcamentoController extends Controller
         $newOrcamento->numero = $numero;
         $newOrcamento->distrito_id = $distrito_id;
         $newOrcamento->concelho_id = $concelho_id;
+        $newOrcamento->data_execucao = $data_execucao;
         if($imagem){
             $imagem_url = $imagem->store('imagens/orcamentos','public');
             $newOrcamento->imagem = $imagem_url;

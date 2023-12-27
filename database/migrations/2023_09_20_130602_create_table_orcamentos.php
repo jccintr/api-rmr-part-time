@@ -31,6 +31,7 @@ return new class extends Migration
             $table->foreignIdFor(Concelho::class);
             $table->string('imagem')->nullable();
             $table->integer('status')->default(0); // 0-aguardando propostas 1-proposta aceita
+            //$table->datetime('data_execucao')->nullable();
             //$table->unsignedBigInteger('proposta_id');
             $table->timestamps();
             //$table->foreign('proposta_id')->references('id')->on('propostas');
