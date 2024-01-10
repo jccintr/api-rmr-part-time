@@ -18,7 +18,7 @@ class PaymentController extends Controller
             $stripe = new \Stripe\StripeClient(env('STRIPE_SK'));
             $response = $stripe->paymentIntents->create([
             'amount' => $amount,
-            'currency' => 'eur' //brl', //'usd', // eur
+            'currency' => 'eur', //brl', //'usd', // eur
             'automatic_payment_methods' => ['enabled' => true],
             ]);
             return response()->json(['paymentIntent' => $response->client_secret],200);
