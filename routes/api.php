@@ -14,6 +14,7 @@ use App\Http\Controllers\ConcelhoController;
 use App\Http\Controllers\OrcamentoController;
 use App\Http\Controllers\PropostaController;
 use App\Http\Controllers\EmailVerificationController;
+use App\Http\Controllers\PaymentController;
 
 
 /*
@@ -58,6 +59,8 @@ Route::middleware('auth:sanctum')->get('/orcamentos/categoria/{id}', [OrcamentoC
 Route::middleware('auth:sanctum')->post('/propostas', [PropostaController::class, 'store']);
 Route::middleware('auth:sanctum')->put('/propostas/{id}', [PropostaController::class, 'update']);
 Route::middleware('auth:sanctum')->delete('/propostas/{id}', [PropostaController::class, 'destroy']);
+
+Route::middleware('auth:sanctum')->post('/payment/intent', [PaymentController::class, 'paymentIntent']);
 
 
 
