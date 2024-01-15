@@ -15,6 +15,9 @@ return new class extends Migration
     {
         Schema::create('config', function (Blueprint $table) {
             $table->id();
+            $table->integer('percentual_iva')->default(23);
+            $table->integer('percentual_cliente')->default(5);
+            $table->integer('percentual_profissional')->default(20);
             $table->timestamps();
         });
     }

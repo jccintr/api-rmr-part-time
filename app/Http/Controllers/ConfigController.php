@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Config;
+use Illuminate\Support\Facades\Auth;
 
 class ConfigController extends Controller
 {
@@ -13,7 +15,9 @@ class ConfigController extends Controller
      */
     public function index()
     {
-        //
+        $config = Config::find(1);
+
+        return response()->json($config,200);
     }
 
     /**

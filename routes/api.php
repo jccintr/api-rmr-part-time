@@ -15,6 +15,8 @@ use App\Http\Controllers\OrcamentoController;
 use App\Http\Controllers\PropostaController;
 use App\Http\Controllers\EmailVerificationController;
 use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\OrderController;
+use App\Http\Controllers\ConfigController;
 
 
 /*
@@ -59,10 +61,12 @@ Route::middleware('auth:sanctum')->get('/orcamentos/categoria/{id}', [OrcamentoC
 Route::middleware('auth:sanctum')->post('/propostas', [PropostaController::class, 'store']);
 Route::middleware('auth:sanctum')->put('/propostas/{id}', [PropostaController::class, 'update']);
 Route::middleware('auth:sanctum')->delete('/propostas/{id}', [PropostaController::class, 'destroy']);
-
+// Payments
 Route::middleware('auth:sanctum')->post('/payment/intent', [PaymentController::class, 'paymentIntent']);
-
-
+// Orders
+Route::middleware('auth:sanctum')->post('/orders', [OrderController::class, 'store']);
+// Config
+Route::middleware('auth:sanctum','verified')->get('/config', [ConfigController::class, 'index']);
 
 
 // testes da stake house
