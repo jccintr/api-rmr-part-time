@@ -20,7 +20,9 @@ class PropostaController extends Controller
      */
     public function index()
     {
-        //
+        $propostas = Proposta::where('user_id',Auth::User()->id)->with('orcamento')->get();
+
+        return response()->json($propostas,200);
     }
 
     /**
