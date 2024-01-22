@@ -9,5 +9,5 @@ class Config extends Model
 {
     use HasFactory;
     protected $table ='config';
-    protected $fillable = ['percentual_iva','percentual_cliente','percentual_profissional'];
+    protected $fillable = ['percentual_iva','percentual_cliente','percentual_profissional','telefone_whats'];
 }

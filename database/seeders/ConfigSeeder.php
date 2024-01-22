@@ -19,6 +19,7 @@ class ConfigSeeder extends Seeder
             'percentual_iva' => 23,
             'percentual_cliente' => 5,
             'percentual_profissional' => 20,
+            'telefone_whats' => '1936145131'
         ]);
     }
 }
