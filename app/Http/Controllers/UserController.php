@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
+use App\Models\Orcamento;
+use App\Models\Proposta;
+use App\Models\Order;
 use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
@@ -61,6 +64,72 @@ public function update(Request $request){
   }
 
 }
+
+public function destroy(Request $request){  //
+
+    //$email = filter_var($request->email,FILTER_VALIDATE_EMAIL);
+    //$password = $request->password;
+
+    //$credentials = ['email'=> $email,'password'=>$password];
+
+
+    //if (!Auth::attempt($credentials)) {
+    //    return response()->json(['erro'=>'Email e ou senha inválidos'],404);
+    //}
+    $user = Auth::User();
+    if($user->role==1){ // 1 cliente
+        $user_orcamentos = Orcamento::where('user_id',$user->id)->get();
+        foreach($user_orcamentos as $user_orcamento){
+            if($user_orcamento->status == 1){ // tem Order
+                 Order::where('orcamento_id',$user_orcamento->id)->delete();
+            }
+           Proposta::where('orcamento_id',$user_orcamento->id)->delete();
+        }
+        Orcamento::where('user_id',$user->id)->delete();
+        Auth::User()->tokens()->delete();
+        User::where('id',$user->id)->delete();
+        return response()->json(['mensagem'=>'Conta de usuário removida com sucesso'],200);
+    }
+    if($user->role==2){ // 2 profissional
+
+    }
+
+
+
+}
+
+public function destroy2(Request $request){
+
+    $email = filter_var($request->email,FILTER_VALIDATE_EMAIL);
+    $password = $request->password;
+
+    $credentials = ['email'=> $email,'password'=>$password];
+
+
+    if (!Auth::attempt($credentials)) {
+        return view('deleteaccount',['error'=>'Email e ou senha inválidos']);
+    }
+    $user = Auth::User();
+    if($user->role==1){ // 1 cliente
+        $user_orcamentos = Orcamento::where('user_id',$user->id)->get();
+        foreach($user_orcamentos as $user_orcamento){
+            if($user_orcamento->status == 1){ // tem Order
+                 Order::where('orcamento_id',$user_orcamento->id)->delete();
+            }
+           Proposta::where('orcamento_id',$user_orcamento->id)->delete();
+        }
+        Orcamento::where('user_id',$user->id)->delete();
+        Auth::User()->tokens()->delete();
+        User::where('id',$user->id)->delete();
+        return view('deletedaccount');
+    }
+    if($user->role==2){ // 2 profissional
+
+    }
+
+
+}
+
 
 
 }

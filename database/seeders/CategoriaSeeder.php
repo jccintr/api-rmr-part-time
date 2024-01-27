@@ -19,6 +19,7 @@ class CategoriaSeeder extends Seeder
 
         $sexo = ['m','f'];
         $unidade = ['hora','diária'];
+        $num_workers = 10;
         
         $nomes_masculinos = [
             'Paulo',
@@ -70,7 +71,7 @@ class CategoriaSeeder extends Seeder
             'descricao' => "Encontre os melhores auxiliares para serviços gerais."
         ]);
 
-        for ($i=1;$i<=10;$i++){
+        for ($i=1;$i<=$num_workers;$i++){
 
             $genero = 'm'; // $sexo[rand(0,1)];
             if ($genero=='m'){
@@ -109,7 +110,7 @@ class CategoriaSeeder extends Seeder
            
         ]);
 
-        for ($i=1;$i<=10;$i++){
+        for ($i=1;$i<=$num_workers;$i++){
 
             $genero = 'f'; //$sexo[rand(0,1)];
             if ($genero=='m'){
@@ -147,7 +148,7 @@ class CategoriaSeeder extends Seeder
             'descricao' => "Encontre os melhores eletricistas para pequenos reparos ou instalações complexas."
            
         ]);
-        for ($i=1;$i<=10;$i++){
+        for ($i=1;$i<=$num_workers;$i++){
 
             $genero = 'm'; //$sexo[rand(0,1)];
             if ($genero=='m'){
@@ -184,7 +185,7 @@ class CategoriaSeeder extends Seeder
             'descricao' => "Encontre os melhores motoristas para serviços de frete e carretos."
            
         ]);
-        for ($i=1;$i<=10;$i++){
+        for ($i=1;$i<=$num_workers;$i++){
 
             $genero = 'm'; //$sexo[rand(0,1)];
             if ($genero=='m'){
@@ -222,7 +223,7 @@ class CategoriaSeeder extends Seeder
             'descricao' => "Encontre os melhores profissionais para limpeza de condomínios."
            
         ]);
-        for ($i=1;$i<=10;$i++){
+        for ($i=1;$i<=$num_workers;$i++){
 
             $genero = $sexo[rand(0,1)];
             if ($genero=='m'){
@@ -259,7 +260,7 @@ class CategoriaSeeder extends Seeder
             'descricao' => "Encontre os melhores profissionais para limpeza de estofados e similares."
            
         ]);
-        for ($i=1;$i<=10;$i++){
+        for ($i=1;$i<=$num_workers;$i++){
 
             $genero = $sexo[rand(0,1)];
             if ($genero=='m'){
@@ -297,7 +298,7 @@ class CategoriaSeeder extends Seeder
             'descricao' => "Encontre os melhores profissionais para serviços de remoção de resíduos de obras em geral."
            
         ]);
-        for ($i=1;$i<=10;$i++){
+        for ($i=1;$i<=$num_workers;$i++){
 
             $genero = 'm'; // $sexo[rand(0,1)];
             if ($genero=='m'){
@@ -335,7 +336,7 @@ class CategoriaSeeder extends Seeder
             'descricao' => "Encontre os melhores pedreiros para reparos em sua moradia ou executar a sua obra."
            
         ]);
-        for ($i=1;$i<=10;$i++){
+        for ($i=1;$i<=$num_workers;$i++){
 
             $genero = 'm'; //$sexo[rand(0,1)];
             if ($genero=='m'){
@@ -373,7 +374,7 @@ class CategoriaSeeder extends Seeder
             'descricao' => "Encontre os melhores profissionais para pintura de teto, paredes internas e externas."
            
         ]);
-        for ($i=1;$i<=10;$i++){
+        for ($i=1;$i<=$num_workers;$i++){
 
             $genero = 'm'; //$sexo[rand(0,1)];
             if ($genero=='m'){
@@ -426,7 +427,7 @@ class CategoriaSeeder extends Seeder
             'descricao' => "Encontre as melhores diaristas para realizar serviços em sua moradia ou empresa."
            
         ]);
-        for ($i=1;$i<=10;$i++){
+        for ($i=1;$i<=$num_workers;$i++){
 
             $genero = 'f'; //$sexo[rand(0,1)];
             if ($genero=='m'){
@@ -463,7 +464,7 @@ class CategoriaSeeder extends Seeder
             'descricao' => "Encontre os melhores profissionais de jardinagem para cuidar de seu jardim ou gramado."
            
         ]);
-        for ($i=1;$i<=10;$i++){
+        for ($i=1;$i<=$num_workers;$i++){
 
             $genero = 'm'; // $sexo[rand(0,1)];
             if ($genero=='m'){
@@ -499,7 +500,7 @@ class CategoriaSeeder extends Seeder
             'imagem' => "imagens/servicos/seguranca.jpg",
             'descricao' => "Encontre os melhores profissionais de segurança para proteger você, sua famĩlia, seu negócio ou o seu evento."
         ]);
-        for ($i=1;$i<=10;$i++){
+        for ($i=1;$i<=$num_workers;$i++){
 
             $genero = $sexo[rand(0,1)];
             if ($genero=='m'){
@@ -535,7 +536,7 @@ class CategoriaSeeder extends Seeder
             'imagem' => "imagens/servicos/manicure.jpg",
             'descricao' => "Encontre as melhores manicures para tratamento dos seus pés e mãos."
         ]);
-        for ($i=1;$i<=10;$i++){
+        for ($i=1;$i<=$num_workers;$i++){
 
             $genero = 'f'; //$sexo[rand(0,1)];
             if ($genero=='m'){
@@ -571,7 +572,7 @@ class CategoriaSeeder extends Seeder
             'imagem' => "imagens/servicos/piscineiro.jpg",
             'descricao' => "Encontre os melhores profissionais para limpeza e manutenção de sua piscina."
         ]);
-        for ($i=1;$i<=10;$i++){
+        for ($i=1;$i<=$num_workers;$i++){
 
             $genero = 'm'; //$sexo[rand(0,1)];
             if ($genero=='m'){

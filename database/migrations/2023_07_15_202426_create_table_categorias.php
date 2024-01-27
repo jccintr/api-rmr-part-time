@@ -17,14 +17,6 @@ return new class extends Migration
             $table->id();
             $table->string('nome');
             $table->text('descricao');
-            /*
-            $table->string('descricao');
-            $table->decimal('valor_cliente', 5, 2)->default(0);
-            $table->decimal('valor_profissional', 5, 2)->default(0);
-            $table->string('unidade');
-            $table->string('horario');
-            $table->string('periodo_minimo');
-            */
             $table->string('imagem');
             $table->timestamps();
         });

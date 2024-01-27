@@ -68,7 +68,8 @@ Route::middleware('auth:sanctum')->post('/payment/intent', [PaymentController::c
 Route::middleware('auth:sanctum')->post('/orders', [OrderController::class, 'store']);
 // Config
 Route::middleware('auth:sanctum','verified')->get('/config', [ConfigController::class, 'index']);
-
+//delete account
+Route::middleware('auth:sanctum')->post('/deleteaccount',[UserController::class,'destroy']);
 
 // testes da stake house
 /*
