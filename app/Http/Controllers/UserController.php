@@ -8,6 +8,7 @@ use App\Models\User;
 use App\Models\Orcamento;
 use App\Models\Proposta;
 use App\Models\Order;
+use App\Models\Worker;
 use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
@@ -91,7 +92,22 @@ public function destroy(Request $request){  //
         return response()->json(['mensagem'=>'Conta de usuário removida com sucesso'],200);
     }
     if($user->role==2){ // 2 profissional
-
+        $user_propostas = Proposta::where('user_id',$user->id)->get();
+        foreach($user_propostas as $user_proposta){
+            if($user_proposta->aceita == true){ // proposta aceita. remover do Orcamento e Order
+                $orcamento = Orcamento::find($user_proposta->orcamento_id);
+                $orcamento->proposta_id = null;
+                $orcamento->save();
+                $order = Order::where('proposta_id',$user_proposta->id)->first();
+                $order->proposta_id = null;
+                $order->save();
+            }
+        }
+        Proposta::where('user_id',$user->id)->delete();
+        Worker::where('id',$user->id)->delete();
+        Auth::User()->tokens()->delete();
+        User::where('id',$user->id)->delete();
+        return response()->json(['mensagem'=>'Conta de usuário removida com sucesso'],200);
     }
 
 
@@ -124,7 +140,22 @@ public function destroy2(Request $request){
         return view('deletedaccount');
     }
     if($user->role==2){ // 2 profissional
-
+        $user_propostas = Proposta::where('user_id',$user->id)->get();
+        foreach($user_propostas as $user_proposta){
+            if($user_proposta->aceita == true){ // proposta aceita. remover do Orcamento e Order
+                $orcamento = Orcamento::find($user_proposta->orcamento_id);
+                $orcamento->proposta_id = null;
+                $orcamento->save();
+                $order = Order::where('proposta_id',$user_proposta->id)->first();
+                $order->proposta_id = null;
+                $order->save();
+            }
+        }
+       Proposta::where('user_id',$user->id)->delete();
+       Worker::where('id',$user->id)->delete();
+       Auth::User()->tokens()->delete();
+       User::where('id',$user->id)->delete();
+        return view('deletedaccount');
     }
 
 

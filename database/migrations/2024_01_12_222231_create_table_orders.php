@@ -17,8 +17,8 @@ return new class extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(Orcamento::class);
-            $table->foreignIdFor(Proposta::class);
+            $table->foreignIdFor(Orcamento::class)->nullable();;
+            $table->foreignIdFor(Proposta::class)->nullable();;
             $table->decimal('valor_proposta', 5, 2)->default(0);
             $table->decimal('valor_iva', 5, 2)->default(0);
             $table->decimal('valor_taxa_uso', 5, 2)->default(0);
