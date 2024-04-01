@@ -33,6 +33,7 @@ use App\Http\Controllers\ConfigController;
 
 // login controller =========================================================
 Route::post('/login',[loginController::class,'login']);
+Route::post('/signin',[loginController::class,'loginAdmin']);
 Route::middleware('auth:sanctum')->post('/logout',[loginController::class,'logout']);
 Route::post('/cadastro',[loginController::class,'cadastro']);
 Route::middleware('auth:sanctum')->post('/verifyemail', [loginController::class, 'verifyEmail']);
@@ -46,7 +47,9 @@ Route::post('/user/update',[UserController::class,'update']);
 // Categorias
 Route::get('/categorias', [CategoriaController::class, 'index']);
 Route::middleware('auth:sanctum')->get('/categorias2', [CategoriaController::class, 'index2']);
+Route::middleware('auth:sanctum')->post('/categorias', [CategoriaController::class, 'store']);
 Route::get('/categorias/{id}', [CategoriaController::class, 'show']);
+Route::middleware('auth:sanctum')->post('/categorias/{id}', [CategoriaController::class, 'update']);
 // Distritos
 Route::get('/distritos', [DistritoController::class, 'index']);
 // Concelhos

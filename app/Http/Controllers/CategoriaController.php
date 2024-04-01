@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Categoria;
+use Illuminate\Support\Facades\Storage;
+
 
 class CategoriaController extends Controller
 {
@@ -42,7 +44,36 @@ class CategoriaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+       // $request->validate([
+       //     'imagem' => 'required|mimes:jpg,png|max:2048',
+       // ]);
+
+
+      $array = ['erro'=>''];
+      $nome = $request->nome;
+      $descricao = $request->descricao;
+      $imagem = $request->file('imagem');
+
+     
+
+      if (!$imagem or !$nome or !$descricao) {
+        $array['erro'] = "Campos Obrigatórios não informados.";
+        return response()->json($array,400);
+      }
+
+      $imagem_url = $imagem->store('imagens/categorias','public');
+
+      $newCategoria = new Categoria();
+      
+      $newCategoria->nome = $nome;
+      $newCategoria->descricao = $descricao;
+      $newCategoria->imagem = $imagem_url;
+      $newCategoria->save();
+     
+      return response()->json($newCategoria,201);
+
+      
     }
 
     /**
@@ -67,7 +98,30 @@ class CategoriaController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $imagem = $request->file('imagem');
+        $nome = $request->nome;
+        $descricao = $request->descricao;
+        $ativo = $request->ativo;
+      
+        if(!$nome or !$descricao ){
+             $array['erro'] = "Campos obrigatórios não informados. ".$nome;
+             return response()->json($array,400);
+        }
+
+        $categoria = Categoria::find($id);
+        $categoria->nome = $nome;
+        $categoria->descricao = $descricao;
+        $categoria->ativo = $ativo;
+
+        if($imagem){
+            Storage::disk('public')->delete($categoria->imagem);
+            $imagem_url = $imagem->store('imagens/categorias','public');
+            $categoria->imagem = $imagem_url;
+        }
+
+        $categoria->save();
+        return response()->json($categoria,200);
+
     }
 
     /**

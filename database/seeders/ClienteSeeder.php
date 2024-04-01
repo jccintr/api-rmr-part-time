@@ -16,8 +16,8 @@ class ClienteSeeder extends Seeder
      */
     public function run()
     {
-        $num_orcamentos = 5;
-        $max_propostas = 3;
+        $num_orcamentos = 2;
+        $max_propostas = 2;
 
         $cliente_id = DB::table('users')->insertGetid([
             'name' => 'Fausto Silva',

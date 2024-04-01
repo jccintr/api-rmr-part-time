@@ -19,7 +19,7 @@ class CategoriaSeeder extends Seeder
 
         $sexo = ['m','f'];
         $unidade = ['hora','diária'];
-        $num_workers = 10;
+        $num_workers = 3;
         
         $nomes_masculinos = [
             'Paulo',

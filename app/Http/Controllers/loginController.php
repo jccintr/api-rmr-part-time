@@ -22,6 +22,33 @@ class loginController extends Controller
         Auth::User()->currentAccessToken()->delete();
         return response()->json(['mensagem'=>'User logged out'],200);
     }
+
+    public function loginAdmin(Request $request){
+
+        $email = filter_var($request->email,FILTER_VALIDATE_EMAIL);
+        $password = $request->password;
+ 
+        $credentials = ['email'=> $email,'password'=>$password];
+
+        //verifica se o email existe
+        if (!Auth::attempt($credentials)) {
+            return response()->json(['erro'=>'Email e ou senha inválidos'],404);
+        }
+
+        if(!Auth::User()->isAdmin){
+            return response()->json(['erro'=>'Email e ou senha inválidos'],404);
+        }
+
+        $token = Auth::User()->createToken('rmr');
+        $loggedUser = Auth::User();
+        $loggedUser['token'] = $token->plainTextToken;
+        if (!Auth::User()->hasVerifiedEmail()){
+           return response()->json($loggedUser,401); 
+        } else {
+            return response()->json($loggedUser,200); 
+        }
+
+    }
     
     public function login(Request $request){
 

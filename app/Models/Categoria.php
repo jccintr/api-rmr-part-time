@@ -9,7 +9,8 @@ class Categoria extends Model
 {
     use HasFactory;
     protected $table ='categorias';
-    protected $fillable = ['nome','descricao','imagem'];
+    protected $fillable = ['nome','descricao','imagem','ativo'];
+    protected $casts = ['ativo'=> 'boolean'];
 
     protected $hidden = [
         'created_at',
