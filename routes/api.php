@@ -17,6 +17,7 @@ use App\Http\Controllers\EmailVerificationController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ConfigController;
+use App\Http\Controllers\WorkerController;
 
 
 /*
@@ -43,7 +44,12 @@ Route::post('/changepassword', [loginController::class, 'changePassword']);
 // User controller =========================================================
 Route::middleware('auth:sanctum')->post('/avatar',[UserController::class,'updateAvatar']);
 Route::middleware('auth:sanctum','verified')->get('/user',[UserController::class,'getUser']);
+Route::middleware('auth:sanctum','verified')->get('/clientes/{id}',[UserController::class,'getCliente']);
+Route::middleware('auth:sanctum','verified')->get('/clientes',[UserController::class,'getAllClients']);
+Route::middleware('auth:sanctum','verified')->post('/clientes/{id}',[UserController::class,'updateCliente']);
 Route::post('/user/update',[UserController::class,'update']);
+// workers
+Route::middleware('auth:sanctum','verified')->get('/workers', [WorkerController::class, 'index']);
 // Categorias
 Route::get('/categorias', [CategoriaController::class, 'index']);
 Route::middleware('auth:sanctum')->get('/categorias2', [CategoriaController::class, 'index2']);

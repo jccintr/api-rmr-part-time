@@ -101,8 +101,9 @@ class CategoriaController extends Controller
         $imagem = $request->file('imagem');
         $nome = $request->nome;
         $descricao = $request->descricao;
-        $ativo = $request->ativo;
-      
+        $ativo =  $request->ativo;
+        
+        
         if(!$nome or !$descricao ){
              $array['erro'] = "Campos obrigatórios não informados. ".$nome;
              return response()->json($array,400);

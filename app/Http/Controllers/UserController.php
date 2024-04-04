@@ -38,10 +38,32 @@ public function updateAvatar(Request $request) {
 }
 
 public function getUser(Request $request) {
-
   
     return response()->json(Auth::User(),200);
+}
+
+ public function getCliente($id){
+
+      $user = User::find($id)->with('concelho.distrito')->get();
+      if(!$user){
+          return response()->json(['erro'=> 'Usuario não encontrado.'],404);
+      }
+       return response()->json($user,200);
+    }
+
+public function getAllClients(Request $request) {
   
+   
+    $clientes = User::where('role',1)->with('concelho.distrito')->get();
+    return response()->json($clientes,200);
+
+}
+
+public function getAllWorkers(Request $request) {
+  
+   
+    $workers = User::where('role',2)->with('concelho.distrito')->get();
+    return response()->json($workers,200);
 
 }
 
@@ -64,6 +86,38 @@ public function update(Request $request){
       return response()->json(['erro'=>'Usuário não encontrado'],404);
   }
 
+}
+
+public function updateCliente(Request $request, $id){
+  
+    $nome = $request->nome;
+    $telefone = $request->telefone;
+    $concelho_id = $request->concelho_id;
+    $isAdmin = $request->isAdmin;
+    $avatar = $request->file('avatar');
+
+    if(!$nome or !$telefone or !$concelho_id ){
+        $array['erro'] = "Campos obrigatórios não informados.";
+        return response()->json($array,400);
+   }
+
+   $user = User::find($id);
+   $user->name = $nome;
+   $user->telefone = $telefone;
+   $user->concelho_id = $concelho_id;
+   $user->isAdmin = $isAdmin;
+   
+   if($avatar){
+       if($user->avatar){
+          Storage::disk('public')->delete($user->avatar);
+       }
+      
+       $avatar_url = $avatar->store('imagens/avatar','public');
+       $user->avatar = $avatar_url;
+   }
+
+   $user->save();
+   return response()->json($user,200);
 }
 
 public function destroy(Request $request){  //

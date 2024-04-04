@@ -20,4 +20,8 @@ class Worker extends Model
     public function user(){
         return $this->hasOne(User::class,'id','user_id');
        }
+
+   public function categoria(){
+    return $this->hasOne(Categoria::class,'id','categoria_id');
+   }    
 }

@@ -47,8 +47,8 @@ class User extends Authenticatable implements MustVerifyEmail
         'code_expire_at',
         'email_verified_at',
         'password_verification_code',
-        'password_code_expire_at',
-        'isAdmin'
+        'password_code_expire_at'
+        
     ];
 
     /**
@@ -58,7 +58,7 @@ class User extends Authenticatable implements MustVerifyEmail
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
-        'isAdmin'=> 'boolean'
+        'isAdmin' => 'boolean'
     ];
 
     public function concelho(){
