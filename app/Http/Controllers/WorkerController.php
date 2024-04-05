@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Worker;
+use App\Models\User;
+use Illuminate\Support\Facades\Storage;
 
 use Illuminate\Http\Request;
 
@@ -50,7 +52,43 @@ class WorkerController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        if(!Auth::User()->isAdmin){
+            return response()->json(['erro'=>'Acesso não autorizado.'],401);
+        }
+        
+        $nome = $request->nome;
+        $telefone = $request->telefone;
+        $categoria_id = $request->categoria_id;
+        $concelho_id = $request->concelho_id;
+        $isAdmin = $request->isAdmin;
+        $avatar = $request->file('avatar');
+    
+        if(!$nome or !$telefone or !$concelho_id or !$categoria_id ){
+            $array['erro'] = "Campos obrigatórios não informados.";
+            return response()->json($array,400);
+       }
+
+       $worker = Worker::find($id);
+       $worker->categoria_id = $categoria_id;
+       $worker->save();
+    
+       $user = User::find($worker->user_id);
+       $user->name = $nome;
+       $user->telefone = $telefone;
+       $user->concelho_id = $concelho_id;
+       $user->isAdmin = $isAdmin;
+       
+       if($avatar){
+           if($user->avatar){
+              Storage::disk('public')->delete($user->avatar);
+           }
+          
+           $avatar_url = $avatar->store('imagens/avatar','public');
+           $user->avatar = $avatar_url;
+       }
+    
+       $user->save();
+       return response()->json($worker,200);
     }
 
     /**

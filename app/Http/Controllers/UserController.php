@@ -69,6 +69,8 @@ public function getAllWorkers(Request $request) {
 
 public function update(Request $request){
 
+   
+
   $usuario_id = $request->usuario_id;
   $documento = $request->documento;
   $endereco = $request->endereco;
@@ -90,6 +92,10 @@ public function update(Request $request){
 
 public function updateCliente(Request $request, $id){
   
+    if(!Auth::User()->isAdmin){
+        return response()->json(['erro'=>'Acesso não autorizado.'],401);
+    }
+
     $nome = $request->nome;
     $telefone = $request->telefone;
     $concelho_id = $request->concelho_id;
