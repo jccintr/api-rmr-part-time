@@ -78,6 +78,7 @@ Route::middleware('auth:sanctum')->post('/payment/intent', [PaymentController::c
 Route::middleware('auth:sanctum')->post('/orders', [OrderController::class, 'store']);
 // Config
 Route::middleware('auth:sanctum','verified')->get('/config', [ConfigController::class, 'index']);
+Route::middleware('auth:sanctum','verified')->post('/config', [ConfigController::class, 'update']);
 //delete account
 Route::middleware('auth:sanctum')->post('/deleteaccount',[UserController::class,'destroy']);
 

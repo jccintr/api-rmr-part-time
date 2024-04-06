@@ -18,6 +18,7 @@ return new class extends Migration
             $table->integer('percentual_iva')->default(23);
             $table->integer('percentual_cliente')->default(5);
             $table->integer('percentual_profissional')->default(20);
+           // $table->string('telefone_whats')->default('1936145131');
             $table->timestamps();
         });
     }

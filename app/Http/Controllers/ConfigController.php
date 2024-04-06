@@ -49,9 +49,15 @@ class ConfigController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+        $config = Config::find(1);
+        $config->percentual_iva = $request->percentual_iva;
+        $config->percentual_cliente = $request->percentual_cliente;
+        $config->percentual_profissional = $request->percentual_profissional;
+        $config->telefone_whats = $request->telefone_whats;
+        $config->save();
+        return response()->json($config,200);
     }
 
     /**
