@@ -84,7 +84,7 @@ class OrcamentoController extends Controller
      */
     public function show($id)
     {
-        $orcamento = Orcamento::with('propostas')->with('distrito')->with('concelho')->with('categoria')->find($id);
+        $orcamento = Orcamento::with('user')->with('distrito')->with('concelho')->with('categoria')->with('propostas.user')->find($id);
 
         return response()->json($orcamento,200);
     }

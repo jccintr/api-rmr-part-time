@@ -18,6 +18,8 @@ use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ConfigController;
 use App\Http\Controllers\WorkerController;
+use App\Http\Controllers\DashboardController;
+
 
 
 /*
@@ -81,7 +83,8 @@ Route::middleware('auth:sanctum','verified')->get('/config', [ConfigController::
 Route::middleware('auth:sanctum','verified')->post('/config', [ConfigController::class, 'update']);
 //delete account
 Route::middleware('auth:sanctum')->post('/deleteaccount',[UserController::class,'destroy']);
-
+// Dashboard
+Route::middleware('auth:sanctum','verified')->get('/dashboard', [DashboardController::class, 'index']);
 // testes da stake house
 /*
 Route::post('/backHomeCasa', [DistritoController::class, 'backHomeCasa']);

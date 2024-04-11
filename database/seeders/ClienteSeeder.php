@@ -16,8 +16,8 @@ class ClienteSeeder extends Seeder
      */
     public function run()
     {
-        $num_orcamentos = 2;
-        $max_propostas = 2;
+        $num_orcamentos = 3;
+        $max_propostas = 4;
 
         $cliente_id = DB::table('users')->insertGetid([
             'name' => 'Fausto Silva',
@@ -47,7 +47,7 @@ class ClienteSeeder extends Seeder
 
                 DB::table('propostas')->insert([
                     'orcamento_id'=> $orcamento_id,
-                    'user_id' => rand(1,130),
+                    'user_id' => rand(1,30),
                     'resposta' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
                     'valor' => rand(100,500).'.00',
                     'created_at' =>  date("Y-m-d H:i:s")   
@@ -84,7 +84,7 @@ class ClienteSeeder extends Seeder
 
                 DB::table('propostas')->insert([
                     'orcamento_id'=> $orcamento_id,
-                    'user_id' => rand(1,130),
+                    'user_id' => rand(1,30),
                     'resposta' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
                     'valor' => rand(100,500).'.00',
                     'created_at' =>  date("Y-m-d H:i:s")   
@@ -123,7 +123,7 @@ class ClienteSeeder extends Seeder
 
                 DB::table('propostas')->insert([
                     'orcamento_id'=> $orcamento_id,
-                    'user_id' => rand(1,130),
+                    'user_id' => rand(1,30),
                     'resposta' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
                     'valor' => rand(100,500).'.00',
                     'created_at' =>  date("Y-m-d H:i:s")   
@@ -134,7 +134,7 @@ class ClienteSeeder extends Seeder
         }
 // ==================================================================================================
         $cliente_id = DB::table('users')->insertGetid([
-            'name' => 'Getulio Lima',
+            'name' => 'Jorel Lima',
             'email' => 'afvbrascol1@gmail.com',
             'password' => Hash::make('123'),
             'role' => 1,
@@ -160,20 +160,20 @@ class ClienteSeeder extends Seeder
 
                 DB::table('propostas')->insert([
                     'orcamento_id'=> $orcamento_id,
-                    'user_id' => rand(1,130),
+                    'user_id' => rand(1,30),
                     'resposta' => 'Resposta ao orçamento Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed dbe t dolore magna aliqua.',
                     'valor' => rand(100,500).'.00',
                     'created_at' =>  date("Y-m-d H:i:s")   
                 ]);
 
             }
-            DB::table('propostas')->insert([
-                'orcamento_id'=> $orcamento_id,
-                'user_id' => 91,
-                'resposta' => 'Sou o Julio Cesar e estou disponivel para trabalhar neste seu orçamento.',
-                'valor' => rand(100,500).'.00',
-                'created_at' =>  date("Y-m-d H:i:s")   
-            ]);
+            // DB::table('propostas')->insert([
+            //     'orcamento_id'=> $orcamento_id,
+            //     'user_id' => 91,
+            //     'resposta' => 'Sou o Julio Cesar e estou disponivel para trabalhar neste seu orçamento.',
+            //     'valor' => rand(100,500).'.00',
+            //     'created_at' =>  date("Y-m-d H:i:s")   
+            // ]);
 
         }    
     }
