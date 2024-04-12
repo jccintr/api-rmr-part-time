@@ -23,6 +23,8 @@ class OrderController extends Controller
     public function index()
     {
         
+        $orders = Order::with('proposta.user')->with('orcamento.user')->get();
+        return response()->json($orders,200);
 
     }
 

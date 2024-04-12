@@ -78,6 +78,7 @@ Route::middleware('auth:sanctum')->delete('/propostas/{id}', [PropostaController
 Route::middleware('auth:sanctum')->post('/payment/intent', [PaymentController::class, 'paymentIntent']);
 // Orders
 Route::middleware('auth:sanctum')->post('/orders', [OrderController::class, 'store']);
+Route::middleware('auth:sanctum')->get('/orders', [OrderController::class, 'index']);
 // Config
 Route::middleware('auth:sanctum','verified')->get('/config', [ConfigController::class, 'index']);
 Route::middleware('auth:sanctum','verified')->post('/config', [ConfigController::class, 'update']);

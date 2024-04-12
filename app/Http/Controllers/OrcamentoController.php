@@ -23,8 +23,8 @@ class OrcamentoController extends Controller
 
     public function getAll()
     {
-        $orcamentos = Orcamento::where('status',0)->with('user')->with('concelho')->with('distrito')->with('propostas')->with('categoria')->get();
-
+        $orcamentos = Orcamento::with('user')->with('concelho')->with('distrito')->with('propostas')->with('categoria')->get();
+//where('status',0)
         return response()->json($orcamentos,200);
     }
 

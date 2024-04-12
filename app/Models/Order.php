@@ -21,5 +21,13 @@ class Order extends Model
         'payment_intent'
     ];
 
+    public function proposta(){
+        return $this->hasOne(Proposta::class,'id','proposta_id');
+    }
+
+    public function orcamento(){
+        return $this->hasOne(Orcamento::class,'id','orcamento_id');
+    }
+
 
 }
