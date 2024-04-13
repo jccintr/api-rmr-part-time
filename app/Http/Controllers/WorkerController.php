@@ -62,6 +62,8 @@ class WorkerController extends Controller
         $concelho_id = $request->concelho_id;
         $isAdmin = $request->isAdmin;
         $avatar = $request->file('avatar');
+        $nif = $request->nif;
+        $iban = $request->iban;
     
         if(!$nome or !$telefone or !$concelho_id or !$categoria_id ){
             $array['erro'] = "Campos obrigatórios não informados.";
@@ -77,6 +79,8 @@ class WorkerController extends Controller
        $user->telefone = $telefone;
        $user->concelho_id = $concelho_id;
        $user->isAdmin = $isAdmin;
+       $user->nif = $nif;
+       $user->iban = $iban;
        
        if($avatar){
            if($user->avatar){

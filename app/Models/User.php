@@ -32,7 +32,9 @@ class User extends Authenticatable implements MustVerifyEmail
         'avatar',
         'verification_code',
         'code_expire_at',
-        'isAdmin'
+        'isAdmin',
+        'nif',
+        'iban'
     ];
 
     /**

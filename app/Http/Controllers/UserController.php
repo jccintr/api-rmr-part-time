@@ -101,6 +101,8 @@ public function updateCliente(Request $request, $id){
     $concelho_id = $request->concelho_id;
     $isAdmin = $request->isAdmin;
     $avatar = $request->file('avatar');
+    $nif = $request->nif;
+    $iban = $request->iban;
 
     if(!$nome or !$telefone or !$concelho_id ){
         $array['erro'] = "Campos obrigatórios não informados.";
@@ -112,6 +114,8 @@ public function updateCliente(Request $request, $id){
    $user->telefone = $telefone;
    $user->concelho_id = $concelho_id;
    $user->isAdmin = $isAdmin;
+   $user->nif = $nif;
+   $user->iban = $iban;
    
    if($avatar){
        if($user->avatar){
