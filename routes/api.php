@@ -46,6 +46,8 @@ Route::post('/changepassword', [loginController::class, 'changePassword']);
 // User controller =========================================================
 Route::middleware('auth:sanctum')->post('/avatar',[UserController::class,'updateAvatar']);
 Route::middleware('auth:sanctum','verified')->get('/user',[UserController::class,'getUser']);
+Route::middleware('auth:sanctum','verified')->post('/user/create-client',[UserController::class,'storeClient']);
+Route::middleware('auth:sanctum','verified')->post('/user/create-worker',[UserController::class,'storeWorker']);
 Route::middleware('auth:sanctum','verified')->get('/clientes/{id}',[UserController::class,'getCliente']);
 Route::middleware('auth:sanctum','verified')->get('/clientes',[UserController::class,'getAllClients']);
 Route::middleware('auth:sanctum','verified')->post('/clientes/{id}',[UserController::class,'updateCliente']);

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use App\Models\User;
 use App\Models\Orcamento;
 use App\Models\Proposta;
@@ -222,6 +223,101 @@ public function destroy2(Request $request){
         return view('deletedaccount');
     }
 
+
+}
+
+public function storeClient(Request $request ){
+
+    if(!Auth::User()->isAdmin){
+        return response()->json(['erro'=>'Acesso não autorizado.'],401);
+    }
+
+    $name = $request->name;
+    $email = filter_var($request->email,FILTER_VALIDATE_EMAIL);
+    $password = $request->password;
+    $telefone = $request->telefone;
+    $concelho_id = $request->concelho_id;
+    $nif = $request->nif;
+    $iban = $request->iban;
+    $avatar = $request->file('avatar');
+
+    if(!$name or !$email or !$password or !$telefone or !$concelho_id)  {
+        $array['erro'] = "Campos obrigatórios não informados.";
+        return response()->json($array,400);
+    }
+
+    $user = User::select()->where('email', $email)->first();
+    if($user) {
+        $array['erro'] = "Este email já está sendo utilizado.";
+        return response()->json($array,400);
+    }
+
+    $newUser = new User();
+    $newUser->name = $name;
+    $newUser->email = $email;
+    $newUser->password = Hash::make($password);
+    $newUser->telefone = $telefone;
+    $newUser->role = 1;
+    $newUser->concelho_id = $concelho_id;
+    $newUser->nif = $nif;
+    $newUser->iban = $iban;
+    if($avatar){
+        $avatar_url = $avatar->store('imagens/avatar','public');
+        $newUser->avatar = $avatar_url;
+    }
+    $newUser->email_verified_at =  date("Y-m-d H:i:s");
+    $newUser->save();
+    return response()->json($newUser,201);
+}
+
+public function storeWorker(Request $request ){
+
+    if(!Auth::User()->isAdmin){
+        return response()->json(['erro'=>'Acesso não autorizado.'],401);
+    }
+
+    $name = $request->name;
+    $email = filter_var($request->email,FILTER_VALIDATE_EMAIL);
+    $password = $request->password;
+    $telefone = $request->telefone;
+   // $role = $request->role;
+    $concelho_id = $request->concelho_id;
+    $categoria_id = $request->categoria_id; 
+    $nif = $request->nif;
+    $iban = $request->iban;
+    $avatar = $request->file('avatar');
+
+    if(!$name or !$email or !$password or !$telefone or !$concelho_id)  {
+        $array['erro'] = "Campos obrigatórios não informados.";
+        return response()->json($array,400);
+    }
+
+    $user = User::select()->where('email', $email)->first();
+    if($user) {
+        $array['erro'] = "Este email já está sendo utilizado.";
+        return response()->json($array,400);
+    }
+
+    $newUser = new User();
+    $newUser->name = $name;
+    $newUser->email = $email;
+    $newUser->password = Hash::make($password);
+    $newUser->telefone = $telefone;
+    $newUser->role = 2;
+    $newUser->concelho_id = $concelho_id;
+    $newUser->nif = $nif;
+    $newUser->iban = $iban;
+    if($avatar){
+        $avatar_url = $avatar->store('imagens/avatar','public');
+        $newUser->avatar = $avatar_url;
+    }
+    $newUser->email_verified_at =  date("Y-m-d H:i:s");
+    $newUser->save();
+    $newWorker = new Worker();
+    $newWorker->user_id = $newUser->id;
+    $newWorker->categoria_id = $categoria_id;
+    $newWorker->save();
+    return response()->json($newUser,201);
 
 }
 
