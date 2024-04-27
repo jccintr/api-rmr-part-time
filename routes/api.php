@@ -58,6 +58,7 @@ Route::middleware('auth:sanctum','verified')->post('/workers/{id}',[WorkerContro
 // Categorias
 Route::get('/categorias', [CategoriaController::class, 'index']);
 Route::middleware('auth:sanctum')->get('/categorias2', [CategoriaController::class, 'index2']);
+Route::middleware('auth:sanctum')->get('/categorias/all', [CategoriaController::class, 'listAll']);
 Route::middleware('auth:sanctum')->post('/categorias', [CategoriaController::class, 'store']);
 Route::get('/categorias/{id}', [CategoriaController::class, 'show']);
 Route::middleware('auth:sanctum')->post('/categorias/{id}', [CategoriaController::class, 'update']);

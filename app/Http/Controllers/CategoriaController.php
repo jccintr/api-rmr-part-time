@@ -16,7 +16,7 @@ class CategoriaController extends Controller
      */
     public function index()
     {
-        $categorias = Categoria::orderBy('nome')->get();
+        $categorias = Categoria::where('ativo',1)->orderBy('nome')->get();
         if ($categorias) {
           return response()->json($categorias,200);
         } else {
@@ -28,6 +28,17 @@ class CategoriaController extends Controller
     public function index2()
     {
         $categorias = Categoria::withCount('orcamentos')->orderBy('nome')->get();
+        if ($categorias) {
+          return response()->json($categorias,200);
+        } else {
+          return response()->json(['erro'=>'Categorias não encontradas.'],404);
+        }
+      
+    }
+
+    public function listAll()
+    {
+        $categorias = Categoria::orderBy('nome')->get();
         if ($categorias) {
           return response()->json($categorias,200);
         } else {
